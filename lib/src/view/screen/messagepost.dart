@@ -81,37 +81,33 @@ class _MessagePostingScreenState extends State<MessagePostingScreen> {
               SizedBox(height: 32.0),
               ElevatedButton(
                 onPressed: () async {
-                  // Handle posting the message and its reply here
+
                   String name = _nameController.text;
                   String message = _messageController.text;
 
-                  // Access isExpert.value to get the expert status
                   bool expertStatus = isExpert.value;
 
-                  // Initialize Firebase if not already initialized
-                  await Firebase.initializeApp();
 
                   CollectionReference messagesCollection =
                   FirebaseFirestore.instance.collection('message');
 
                   try {
-                    // Create a new message document with a unique ID
+
                     DocumentReference messageDocument = await messagesCollection.add({
                       'name': name,
                       'message': message,
                       'isExpert': expertStatus,
                     });
 
-                    // Optionally, you can clear the input fields for the main message
+
                     _nameController.clear();
                     _messageController.clear();
 
-                    // Create an empty subcollection for replies within the message document
-                    CollectionReference repliesCollection = messageDocument.collection('replies');
-                    // You don't need to add any documents to it at this point,
-                    // as it will be created automatically when you access it.
 
-                    // Add a reply document to the replies subcollection
+                    CollectionReference repliesCollection = messageDocument.collection('replies');
+
+
+
                     DocumentReference replyDocument = await repliesCollection.add({
                       'sender': '', // Assuming the sender is the same as the message sender
                       'likes': 0,     // Initial likes count for the reply
@@ -122,7 +118,7 @@ class _MessagePostingScreenState extends State<MessagePostingScreen> {
                     print('Message uploaded with ID: ${messageDocument.id}');
                     print('Reply uploaded with ID: ${replyDocument.id}');
                   } catch (error) {
-                    // Handle errors if the upload fails
+
                     print('Error uploading message and reply: $error');
                   }
                 },
