@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "275837002070",
+    "project_id": "sih2023-f65fe",
+    "storage_bucket": "sih2023-f65fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275837002070:android:74672257de05edbd4976f7",
+        "android_client_info": {
+          "package_name": "com.example.office_app_store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARDERNc3rPKb4OjWHzBQngC7npTgCM_ZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
