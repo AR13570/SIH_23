@@ -29,12 +29,12 @@ class CartScreen extends StatelessWidget {
                   .map((Message element) => ExpansionTile(
                         title: Text(element.message),
                         children: element.replies
-                            .map((e) => Row(
+                            .map((reply) => Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(e.message),
-                                    Text(e.likes.toString() + " likes")
+                                    Text(reply.message),
+                                    Text("${reply.likes} likes")
                                   ],
                                 ))
                             .toList(),

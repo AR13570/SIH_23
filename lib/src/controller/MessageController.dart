@@ -7,7 +7,9 @@ class MessageController extends GetxController {
   RxList<Message> messages = RxList<Message>();
   @override
   void onInit() {
-    messages.bindStream(lista());
+    //bind lets you automatically link a list
+    // to the stream for real-time updates
+    messages.bindStream(bindMessages());
     // messages.bindStream(FirebaseFirestore.instance
     //     .collection("message")
     //     .snapshots()
@@ -36,20 +38,32 @@ class MessageController extends GetxController {
     super.onInit();
   }
 
-  Stream<List<Message>> lista() {
+  Stream<List<Message>> bindMessages() {
     Stream<QuerySnapshot> stream =
         FirebaseFirestore.instance.collection("message").snapshots();
 
     return stream.map((event) => event.docs.map((message) {
-          RxList<Reply> reply = RxList<Reply>();
-          reply.bindStream(message.reference
+          //Create a separate obx list for replies
+          //Bind this list with the replies of current message
+          // before binding the message (to prevent Future->null issues)
+          RxList<Reply> replies = RxList<Reply>();
+          replies.bindStream(message.reference
               .collection("replies")
               .snapshots()
               .map((replyCollection) => replyCollection.docs
-                  .map((e) => Reply(e['likes'], e['message'], e['sender']))
+                  .map((replyData) => Reply(
+                      replyId: replyData.id,
+                      likes: replyData['likes'],
+                      message: replyData['message'],
+                      sender: replyData['sender']))
                   .toList()));
+          //finally bind the message list to the message collection
           return Message(
-              message['isExpert'], message['message'], message['name'], reply);
+              messageId: message.id,
+              isExpert: message['isExpert'],
+              message: message['message'],
+              name: message['name'],
+              replies: replies);
         }).toList());
   }
 }
