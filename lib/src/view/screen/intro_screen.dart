@@ -16,7 +16,7 @@ class IntroScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const HomeScreen()),
+                MaterialPageRoute(builder: (_) =>  HomeScreen()),
               );
             },
             style: ButtonStyle(

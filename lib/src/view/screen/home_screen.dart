@@ -14,13 +14,13 @@ final OfficeFurnitureController controller =
 final MessageController messageController = Get.put(MessageController());
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+   HomeScreen({Key? key}) : super(key: key);
 
-  final List<Widget> screens = const [
+  final List<Widget> screens =   [
     OfficeFurnitureListScreen(),
     CartScreen(),
     FavoriteScreen(),
-    ProfileScreen()
+    CropRecommendationScreen()
   ];
 
   @override
