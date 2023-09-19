@@ -5,6 +5,7 @@ import 'package:office_app_store/core/app_data.dart';
 import 'package:office_app_store/src/controller/MessageController.dart';
 import 'package:office_app_store/src/view/screen/cart_screen.dart';
 import 'package:office_app_store/src/view/screen/favorite_screen.dart';
+import 'package:office_app_store/src/view/screen/feedscreen.dart';
 import 'package:office_app_store/src/view/screen/office_furniture_list_screen.dart';
 import 'package:office_app_store/src/view/screen/profile_screen.dart';
 import '../../controller/office_furniture_controller.dart';
@@ -17,10 +18,11 @@ class HomeScreen extends StatelessWidget {
    HomeScreen({Key? key}) : super(key: key);
 
   final List<Widget> screens =   [
-    OfficeFurnitureListScreen(),
-    CartScreen(),
-    FavoriteScreen(),
-    CropRecommendationScreen()
+    const OfficeFurnitureListScreen(),
+    const CartScreen(),
+    const FavoriteScreen(),
+    CropRecommendationScreen(),
+    feedScreen()
   ];
 
   @override
