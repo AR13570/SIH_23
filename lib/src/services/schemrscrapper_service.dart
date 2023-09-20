@@ -13,14 +13,29 @@ class ScrapeService {
       final base_url = 'https://vikaspedia.in'; // Define the base URL
       final items = soup.findAll('a', class_: 'folderfile_name');
       final List<PackageModel> packages = [];
-      for (var item in items) {
+      final desc = soup.findAll('p', class_: null);
+      /*int i=0;
+      for (var item in items ) {
         final title = item.text.trim();
         final href = base_url + (item.attributes['href'] ?? '');
-        final desc = soup.find('p', class_: null);
+        //final desc = soup.findAll('p', class_: null);
         //print(desc);
+        //print(desc.runtimeType);
         PackageModel model =
-            PackageModel(title: title, href: href, desc: desc.toString());
+            PackageModel(title: title, href: href, desc: desc[i].toString());
         packages.add(model);
+        i++;
+      }*/
+      for (int i=0;i<items.length;i++) {
+        final title = items[i].text.trim();
+        final href = base_url + (items[i].attributes['href'] ?? '');
+        //final desc = soup.findAll('p', class_: null);
+        final para = desc[i].text.trim();
+        //print(desc.runtimeType);
+        PackageModel model =
+        PackageModel(title: title, href: href, desc: para);
+        packages.add(model);
+
       }
 
       return packages;

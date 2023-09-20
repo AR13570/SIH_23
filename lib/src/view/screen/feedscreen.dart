@@ -45,6 +45,7 @@ class _feedScreen extends State<feedScreen> {
             await launchUrl(url);
           },
           title: Text(list[index].title),
+          subtitle: Text(list[index].desc),
           //subtitle: Text(list[index].desc), // Display the href
         ),
       ),
