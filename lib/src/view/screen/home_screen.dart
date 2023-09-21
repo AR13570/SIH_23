@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:office_app_store/core/app_data.dart';
 import 'package:office_app_store/core/app_style.dart';
 import 'package:office_app_store/src/model/furniture.dart';
 import 'package:office_app_store/src/view/screen/office_furniture_detail_screen.dart';
+import 'package:office_app_store/src/view/widget/bottom_bar.dart';
 import '../widget/furniture_list_view.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,8 +21,11 @@ class HomeScreen extends StatelessWidget {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text("Hello User", style: h2Style),
+                children: [
+                  Obx(() {
+                    return Text("Hello ${loggedInUser.value.name}",
+                        style: h2Style);
+                  }),
                 ],
               ),
               IconButton(

@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:office_app_store/src/model/messageModel.dart';
+import 'package:office_app_store/src/view/widget/bottom_bar.dart';
 
 enum MessageType { post, reply }
 
 //TODO this user is for testing, replace this with logged in user
-String loggedInUser = "Pratham";
 
 class MessageController extends GetxController {
   RxList<Message> messages = RxList<Message>();
@@ -15,6 +16,7 @@ class MessageController extends GetxController {
     //bind lets you automatically link a list
     // to the stream for real-time updates
     messages.bindStream(bindMessages());
+
     super.onInit();
   }
 
@@ -90,19 +92,19 @@ class MessageController extends GetxController {
           .then((value) {
         var data = value.data();
         List likedBy = data?["liked by"];
-        if (likedBy.contains(loggedInUser)) {
+        if (likedBy.contains(loggedInUser.value.phone)) {
           FirebaseFirestore.instance
               .collection("message")
               .doc(messageId)
               .update({
-            "liked by": FieldValue.arrayRemove([loggedInUser])
+            "liked by": FieldValue.arrayRemove([loggedInUser.value.phone])
           });
         } else {
           FirebaseFirestore.instance
               .collection("message")
               .doc(messageId)
               .update({
-            "liked by": FieldValue.arrayUnion([loggedInUser])
+            "liked by": FieldValue.arrayUnion([loggedInUser.value.phone])
           });
         }
       });
@@ -110,13 +112,13 @@ class MessageController extends GetxController {
       messageDocument.collection("replies").doc(postId!).get().then((value) {
         var data = value.data();
         List likedBy = data?["liked by"];
-        if (likedBy.contains(loggedInUser)) {
+        if (likedBy.contains(loggedInUser.value.phone)) {
           messageDocument.collection("replies").doc(postId).update({
-            "liked by": FieldValue.arrayRemove([loggedInUser])
+            "liked by": FieldValue.arrayRemove([loggedInUser.value.phone])
           });
         } else {
           messageDocument.collection("replies").doc(postId).update({
-            "liked by": FieldValue.arrayUnion([loggedInUser])
+            "liked by": FieldValue.arrayUnion([loggedInUser.value.phone])
           });
         }
       });

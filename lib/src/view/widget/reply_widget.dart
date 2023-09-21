@@ -23,7 +23,10 @@ class ReplyWidget extends StatelessWidget {
         Text(reply.message),
         Chip(
           label: Text("${reply.likes.length}"),
-          deleteIcon: Icon(!selected ? Icons.add : Icons.remove),
+          deleteIcon: Icon(
+            !selected ? Icons.thumb_up : Icons.thumb_down,
+            size: 17,
+          ),
           onDeleted: () {
             messageController.like(
                 messageType: MessageType.reply,

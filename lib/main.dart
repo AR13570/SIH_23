@@ -37,11 +37,8 @@ class MyApp extends StatelessWidget {
       routes: {
         'intro': (context) => IntroScreen(),
         'phone': (context) => MyPhone(),
-        'verify': (context) => MyVerify(),
       },
       theme: AppTheme.lightTheme,
     );
   }
 }
-
-

@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:office_app_store/src/controller/MessageController.dart';
 import 'package:office_app_store/src/view/screen/bottom_navbar.dart';
+import 'package:office_app_store/src/view/widget/bottom_bar.dart';
 
 class PostBottomSheet extends StatelessWidget {
   final MessageType messageType;
   final String? messageId;
   PostBottomSheet({super.key, required this.messageType, this.messageId});
-  final TextEditingController _nameController =
-      TextEditingController(text: "user${Random().nextInt(100)}");
+
   final TextEditingController _messageTextController =
       TextEditingController(text: "random text ${Random().nextInt(100)}");
   final RxBool isExpert = false.obs;
@@ -25,13 +25,8 @@ class PostBottomSheet extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: 'Name',
-                prefixIcon:
-                    Icon(Icons.person), // Add an icon to the "Name" field
-              ),
+            Text(
+              loggedInUser.value.name,
             ),
             const SizedBox(height: 16.0),
             Container(
@@ -56,35 +51,19 @@ class PostBottomSheet extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 16.0),
-            Row(
-              children: [
-                const Text('Is Expert?'),
-                const SizedBox(width: 8.0),
-                Obx(
-                  () => Switch(
-                    value: isExpert.value,
-                    onChanged: (value) {
-                      isExpert.value =
-                          value; // Update using GetX's reactive variable
-                    },
-                  ),
-                ),
-              ],
-            ),
             const SizedBox(height: 32.0),
             ElevatedButton(
               onPressed: () {
                 if (messageType == MessageType.post) {
                   messageController.postMessage(
                       message: _messageTextController.text,
-                      name: _nameController.text,
-                      isExpert: isExpert.value);
+                      name: loggedInUser.value.name,
+                      isExpert: loggedInUser.value.isExpert);
                 } else {
                   messageController.postReply(
                       message: _messageTextController.text,
-                      name: _nameController.text,
-                      isExpert: isExpert.value,
+                      name: loggedInUser.value.name,
+                      isExpert: loggedInUser.value.isExpert,
                       messageId: messageId!);
                 }
               },
