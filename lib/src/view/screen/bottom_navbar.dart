@@ -9,6 +9,7 @@ import 'package:office_app_store/src/view/screen/feedscreen.dart';
 import 'package:office_app_store/src/view/screen/home_screen.dart';
 import 'package:office_app_store/src/view/screen/profile_screen.dart';
 import '../../controller/office_furniture_controller.dart';
+import 'modeltrain.dart';
 
 final OfficeFurnitureController controller =
     Get.put(OfficeFurnitureController());
@@ -19,7 +20,7 @@ class BottomNavBar extends StatelessWidget {
 
   final List<Widget> screens = [
     const HomeScreen(),
-    const CartScreen(),
+    Classifier(),
     ForumScreen(),
     CropRecommendationScreen(),
     feedScreen()

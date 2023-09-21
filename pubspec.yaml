@@ -50,7 +50,8 @@ dependencies:
   url_launcher:
   pinput:
   sms_autofill:
-
+  image_picker: ^0.8.6
+  flutter_tflite: ^1.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -77,6 +78,7 @@ flutter:
   assets:
     - assets/images/
     - assets/
+    - assets/models/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

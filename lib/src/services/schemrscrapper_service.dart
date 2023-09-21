@@ -24,7 +24,7 @@ class ScrapeService {
         PackageModel model =
             PackageModel(title: title, href: href, desc: desc[i].toString());
         packages.add(model);
-        i++;
+
       }*/
       for (int i=0;i<items.length;i++) {
         final title = items[i].text.trim();
