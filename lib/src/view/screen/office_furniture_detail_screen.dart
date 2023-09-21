@@ -10,12 +10,13 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../model/furniture.dart';
 import '../widget/color_picker.dart';
 import '../widget/rating_bar.dart';
-import 'home_screen.dart';
+import 'bottom_navbar.dart';
 
 class OfficeFurnitureDetailScreen extends StatelessWidget {
   final Furniture furniture;
 
-  const OfficeFurnitureDetailScreen({Key? key, required this.furniture}) : super(key: key);
+  const OfficeFurnitureDetailScreen({Key? key, required this.furniture})
+      : super(key: key);
 
   PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
@@ -25,7 +26,9 @@ class OfficeFurnitureDetailScreen extends StatelessWidget {
             return IconButton(
               splashRadius: 18.0,
               onPressed: () => controller.isFavoriteFurniture(furniture),
-              icon: furniture.isFavorite ? const Icon(Icons.bookmark, color: Colors.black) : const Icon(Icons.bookmark_border, color: Colors.black),
+              icon: furniture.isFavorite
+                  ? const Icon(Icons.bookmark, color: Colors.black)
+                  : const Icon(Icons.bookmark_border, color: Colors.black),
             );
           },
         )
@@ -55,14 +58,21 @@ class OfficeFurnitureDetailScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const FittedBox(
-                child: Text('Price', style: TextStyle(color: Colors.black45, fontWeight: FontWeight.bold)),
+                child: Text('Price',
+                    style: TextStyle(
+                        color: Colors.black45, fontWeight: FontWeight.bold)),
               ),
               const SizedBox(height: 5),
               FittedBox(child: Text("\$${furniture.price}", style: h2Style))
             ],
           ),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(primary: AppColor.lightBlack, padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+            style: ElevatedButton.styleFrom(
+                primary: AppColor.lightBlack,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10))),
             onPressed: () {
               controller.addToCart(furniture);
             },
@@ -104,10 +114,12 @@ class OfficeFurnitureDetailScreen extends StatelessWidget {
             child: Obx(
               () {
                 return SmoothIndicator(
-                    effect: const WormEffect(dotColor: Colors.white38, activeDotColor: Colors.white),
+                    effect: const WormEffect(
+                        dotColor: Colors.white38, activeDotColor: Colors.white),
                     // ),
                     // offset: selectedPageViewIndex.toDouble(),
-                    offset: controller.currentPageViewItemIndicator.value.toDouble(),
+                    offset: controller.currentPageViewItemIndicator.value
+                        .toDouble(),
                     count: furniture.images.length);
               },
             ),
@@ -144,20 +156,29 @@ class OfficeFurnitureDetailScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 10),
-                  child: const Text("Synopsis", style: h2Style, textAlign: TextAlign.end).fadeAnimation(0.6),
+                  child: const Text("Synopsis",
+                          style: h2Style, textAlign: TextAlign.end)
+                      .fadeAnimation(0.6),
                 ),
-                Text(furniture.description, maxLines: 5, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.black45)).fadeAnimation(0.8),
+                Text(furniture.description,
+                        maxLines: 5,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(color: Colors.black45))
+                    .fadeAnimation(0.8),
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    const Text("Color :", style: h2Style, textAlign: TextAlign.end),
+                    const Text("Color :",
+                        style: h2Style, textAlign: TextAlign.end),
                     Expanded(child: ColorPicker(furniture.colors)),
                     Expanded(child: GetBuilder(
                       builder: (OfficeFurnitureController controller) {
                         return CounterButton(
                           label: furniture.quantity,
-                          onIncrementSelected: () => controller.increaseItem(furniture),
-                          onDecrementSelected: () => controller.decreaseItem(furniture),
+                          onIncrementSelected: () =>
+                              controller.increaseItem(furniture),
+                          onDecrementSelected: () =>
+                              controller.decreaseItem(furniture),
                         );
                       },
                     ))

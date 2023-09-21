@@ -3,15 +3,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MessagePostingScreen extends StatefulWidget {
+//TODO this screen is no longer needed and can be deleted
 
+class MessagePostingScreen extends StatefulWidget {
   @override
   _MessagePostingScreenState createState() => _MessagePostingScreenState();
-
 }
 
 class _MessagePostingScreenState extends State<MessagePostingScreen> {
-
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
   final RxBool isExpert = false.obs; // Use RxBool from GetX
@@ -32,7 +31,8 @@ class _MessagePostingScreenState extends State<MessagePostingScreen> {
                 controller: _nameController,
                 decoration: InputDecoration(
                   labelText: 'Name',
-                  prefixIcon: Icon(Icons.person), // Add an icon to the "Name" field
+                  prefixIcon:
+                      Icon(Icons.person), // Add an icon to the "Name" field
                 ),
               ),
               SizedBox(height: 16.0),
@@ -69,10 +69,11 @@ class _MessagePostingScreenState extends State<MessagePostingScreen> {
                   Text('Is Expert?'),
                   SizedBox(width: 8.0),
                   Obx(
-                        () => Switch(
+                    () => Switch(
                       value: isExpert.value,
                       onChanged: (value) {
-                        isExpert.value = value; // Update using GetX's reactive variable
+                        isExpert.value =
+                            value; // Update using GetX's reactive variable
                       },
                     ),
                   ),
@@ -80,53 +81,9 @@ class _MessagePostingScreenState extends State<MessagePostingScreen> {
               ),
               SizedBox(height: 32.0),
               ElevatedButton(
-                onPressed: () async {
-
-                  String name = _nameController.text;
-                  String message = _messageController.text;
-
-                  bool expertStatus = isExpert.value;
-
-
-                  CollectionReference messagesCollection =
-                  FirebaseFirestore.instance.collection('message');
-
-                  try {
-
-                    DocumentReference messageDocument = await messagesCollection.add({
-                      'name': name,
-                      'message': message,
-                      'isExpert': expertStatus,
-                    });
-
-
-                    _nameController.clear();
-                    _messageController.clear();
-
-
-                    CollectionReference repliesCollection = messageDocument.collection('replies');
-
-
-
-                    DocumentReference replyDocument = await repliesCollection.add({
-                      'sender': '', // Assuming the sender is the same as the message sender
-                      'likes': 0,     // Initial likes count for the reply
-                      'message': "",
-                    });
-
-
-                    print('Message uploaded with ID: ${messageDocument.id}');
-                    print('Reply uploaded with ID: ${replyDocument.id}');
-                  } catch (error) {
-
-                    print('Error uploading message and reply: $error');
-                  }
-                },
+                onPressed: () {},
                 child: Text('Post query'),
               ),
-
-
-
             ],
           ),
         ),
@@ -134,3 +91,46 @@ class _MessagePostingScreenState extends State<MessagePostingScreen> {
     );
   }
 }
+
+// void copypost() async {
+//
+//   String name = _nameController.text;
+//   String message = _messageController.text;
+//
+//   bool expertStatus = isExpert.value;
+//
+//
+//   CollectionReference messagesCollection =
+//   FirebaseFirestore.instance.collection('message');
+//
+//   try {
+//
+//     DocumentReference messageDocument = await messagesCollection.add({
+//       'name': name,
+//       'message': message,
+//       'isExpert': expertStatus,
+//     });
+//
+//
+//     _nameController.clear();
+//     _messageController.clear();
+//
+//
+//     CollectionReference repliesCollection = messageDocument.collection('replies');
+//
+//
+//
+//     DocumentReference replyDocument = await repliesCollection.add({
+//       'sender': '', // Assuming the sender is the same as the message sender
+//       'likes': 0,     // Initial likes count for the reply
+//       'message': "",
+//     });
+//
+//
+//     print('Message uploaded with ID: ${messageDocument.id}');
+//     print('Reply uploaded with ID: ${replyDocument.id}');
+//   } catch (error) {
+//
+//     print('Error uploading message and reply: $error');
+//   }
+// }

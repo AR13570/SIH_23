@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:office_app_store/core/app_style.dart';
-import 'package:office_app_store/src/view/screen/home_screen.dart';
+import 'package:office_app_store/src/view/screen/bottom_navbar.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({Key? key}) : super(key: key);
@@ -16,14 +16,15 @@ class IntroScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) =>  HomeScreen()),
+                MaterialPageRoute(builder: (_) => BottomNavBar()),
               );
             },
             style: ButtonStyle(
               padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
                 const EdgeInsets.all(8),
               ),
-              backgroundColor: MaterialStateProperty.all(Colors.white.withOpacity(0.4)),
+              backgroundColor:
+                  MaterialStateProperty.all(Colors.white.withOpacity(0.4)),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0),

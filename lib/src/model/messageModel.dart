@@ -3,6 +3,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 class Message {
   String messageId;
   bool isExpert;
+  List<dynamic> likes;
   String message;
   String name;
   RxList<Reply> replies;
@@ -10,6 +11,7 @@ class Message {
   Message(
       {required this.messageId,
       required this.isExpert,
+      required this.likes,
       required this.message,
       required this.name,
       required this.replies});
@@ -17,7 +19,7 @@ class Message {
 
 class Reply {
   String replyId;
-  int likes;
+  List<dynamic> likes;
   String message;
   String sender;
 

@@ -1,52 +1,87 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:office_app_store/core/app_color.dart';
 import 'package:office_app_store/core/app_data.dart';
-import 'package:office_app_store/src/controller/MessageController.dart';
-import 'package:office_app_store/src/view/screen/cart_screen.dart';
-import 'package:office_app_store/src/view/screen/favorite_screen.dart';
-import 'package:office_app_store/src/view/screen/feedscreen.dart';
-import 'package:office_app_store/src/view/screen/office_furniture_list_screen.dart';
-import 'package:office_app_store/src/view/screen/profile_screen.dart';
-import '../../controller/office_furniture_controller.dart';
-
-final OfficeFurnitureController controller =
-    Get.put(OfficeFurnitureController());
-final MessageController messageController = Get.put(MessageController());
+import 'package:office_app_store/core/app_style.dart';
+import 'package:office_app_store/src/model/furniture.dart';
+import 'package:office_app_store/src/view/screen/office_furniture_detail_screen.dart';
+import '../widget/furniture_list_view.dart';
 
 class HomeScreen extends StatelessWidget {
-   HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
-  final List<Widget> screens =   [
-    const OfficeFurnitureListScreen(),
-    const CartScreen(),
-    const FavoriteScreen(),
-    CropRecommendationScreen(),
-    feedScreen()
-  ];
+  PreferredSize _appBar() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(90),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(25),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text("Hello User", style: h2Style),
+                ],
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.menu),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _searchBar() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: TextField(
+        decoration: InputDecoration(
+            hintText: 'Search',
+            prefixIcon: const Icon(Icons.search, color: Colors.grey),
+            suffixIcon: const Icon(Icons.menu, color: Colors.grey),
+            contentPadding: const EdgeInsets.all(20),
+            border: textFieldStyle,
+            focusedBorder: textFieldStyle),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    print(messageController.messages);
+    Future<Widget?> _navigate(Furniture furniture) {
+      return Navigator.push(
+        context,
+        PageRouteBuilder(
+          transitionDuration: const Duration(seconds: 1),
+          pageBuilder: (_, __, ___) =>
+              OfficeFurnitureDetailScreen(furniture: furniture),
+        ),
+      );
+    }
+
     return Scaffold(
-      bottomNavigationBar: Obx(
-        () {
-          return BottomNavigationBar(
-            unselectedItemColor: Colors.grey,
-            currentIndex: controller.currentBottomNavItemIndex.value,
-            showUnselectedLabels: true,
-            onTap: controller.switchBetweenBottomNavigationItems,
-            fixedColor: AppColor.lightBlack,
-            items: AppData.bottomNavigationItems
-                .map(
-                  (element) => BottomNavigationBarItem(
-                      icon: element.icon, label: element.label),
-                )
-                .toList(),
-          );
-        },
+      appBar: _appBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: ListView(
+          children: [
+            _searchBar(),
+            FurnitureListView(
+              furnitureList: AppData.furnitureList,
+              onTap: _navigate,
+            ),
+            const Text("Popular", style: h2Style),
+            FurnitureListView(
+              furnitureList: AppData.furnitureList,
+              isHorizontal: false,
+              onTap: _navigate,
+            ),
+          ],
+        ),
       ),
-      body: Obx(() => screens[controller.currentBottomNavItemIndex.value]),
     );
   }
 }
