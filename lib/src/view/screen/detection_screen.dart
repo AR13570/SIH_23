@@ -537,7 +537,7 @@ class _Classifier extends State<Classifier> {
                                     child:// Add some spacing between number and text
                                         Text(
                                           '${index + 1}. '+element,
-                                          style: TextStyle(fontSize: 18, color: Colors.lightGreen),
+                                          style: TextStyle(fontSize: 18, color: Colors.grey.shade500),
                                         ),
 
                                   );
