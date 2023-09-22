@@ -1,38 +1,38 @@
-0 Apple_Scab
-1 Apple_Black Rot
-2 Apple_Cedar rust
-3 Apple_Healthy
-4 Background Without Leaves
-5 Blueberry_Healthy
-6 Cherry_Powdery Mildew
-7 Cherry_Healthy
-8 Corn_Cercospora Leaf Spot | Gray Leaf Spot
-9 Corn_Common Rust
-10 Corn_Northern Leaf Blight
-11 Corn_Healthy
-12 Grape_Black Rot
-13 Grape_Esca | Black Measles
-14 Grape_Leaf Blight | Isariopsis Leaf Spot
-15 Grape_Healthy
-16 Orange_Haunglongbing | Citrus Greening
-17 Peach_Bacterial Spot
-18 Peach_Healthy
-19 Pepper bell_Bacterial Spot
-20 Pepper bell_Healthy
-21 Potato_Early Blight
-22 Potato_Late Blight
-23 Potato_Healthy
-24 Raspberry_Healthy
-25 Soybean_Healthy
-26 Squash_Powdery Mildew
-27 Strawberry_Leaf Scorch
-28 Strawberry_Healthy
-29 Tomato_Bacterial Spot
-30 Tomato_Early Blight
-31 Tomato_Late Blight
-32 Tomato_Leaf Mold
-33 Tomato_Septoria Leaf Spot
-34 Tomato_Spider Mites | Two-Spotted Spider Mite
-35 Tomato_Target Spot
-36 Tomato_Yellow Leaf Curl Virus
-37 Tomato_Mosaic Virus
+Apple Scab
+Apple Black Rot
+Apple Cedar Rust
+Apple Healthy
+Blueberry Healthy
+Cherry Powdery Mildew
+Cherry Healthy
+Corn Cercospora Leaf Spot | Gray Leaf Spot
+Corn Common Rust
+Corn Northern Leaf Blight
+Corn Healthy
+Grape Black Rot
+Grape Esca | Black Measles
+Grape Leaf Blight | Isariopsis Leaf Spot
+Grape Healthy
+Orange Haunglongbing | Citrus Greening
+Peach Bacterial Spot
+Peach Healthy
+Pepper Bell Bacterial Spot
+Pepper Bell Healthy
+Potato Early Blight
+Potato Late Blight
+Potato Healthy
+Raspberry Healthy
+Soybean Healthy
+Squash Powdery Mildew
+Strawberry Leaf Scorch
+Strawberry Healthy
+Tomato Bacterial Spot
+Tomato Early Blight
+Tomato Late Blight
+Tomato Leaf Mold
+Tomato Septoria Leaf Spot
+Tomato Spider Mites | Two-Spotted Spider Mite
+Tomato Target Spot
+Tomato Yellow Leaf Curl Virus
+Tomato Mosaic Virus
+Tomato Healthy
