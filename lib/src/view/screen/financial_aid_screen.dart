@@ -12,6 +12,7 @@ class FinancialScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.green,
         title: const Text(
           'Financial Aid',
           style: TextStyle(color: Colors.green),
@@ -20,7 +21,7 @@ class FinancialScreen extends StatelessWidget {
       body: Center(
         child: Obx(() {
           if (_c.subsidiaries.isEmpty) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           } else {
             return ListView.builder(
               itemCount: _c.subsidiaries.length,
@@ -54,8 +55,10 @@ class FinancialScreen extends StatelessWidget {
           }
         }),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.download),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.download),
+        backgroundColor: Colors.green,
+        label: const Text("Interest Rates"),
         onPressed: () async {
           final Uri url = Uri.parse(
               "https://drive.google.com/uc?id=1TSZ5ENkrKQ1K_qJIuVbyGwAs2mqQWG6B&export=download");

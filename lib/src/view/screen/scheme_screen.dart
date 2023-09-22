@@ -45,88 +45,35 @@ class _FeedScreen extends State<FeedScreen> {
           style: h2Style,
         ),
       ),
-      body: Stack(
-        children: [
-          loading
-              ? Center(child: CircularProgressIndicator())
-              : ListView.separated(
-                  itemCount: list.length,
-                  separatorBuilder: (ctx, index) => const Divider(
-                    indent: 8,
-                    endIndent: 8,
-                  ),
-                  itemBuilder: (ctx, index) => ListTile(
-                    onTap: () async {
-                      final Uri url = Uri.parse(list[index].href);
-                      //final url = 'https://vikaspedia.in' + list[index].href;
-                      await launchUrl(url);
-                    },
-                    title: Text(list[index].title),
-                    subtitle: Text(list[index].desc),
-                    //subtitle: Text(list[index].desc), // Display the href
-                  ),
-                ),
-          Align(
-              alignment: Alignment.bottomRight,
-              child: GestureDetector(
-                onTap: () {
-                  Get.to(() => FinancialScreen());
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                      child: Icon(Icons.monetization_on_rounded,
-                        color: Colors.green,
-                        size: screenHeight / 12
-                        ,)
-                    ),
-                    Text("Financial Aid",
-                      style: TextStyle(
-                          fontFamily: "Poppins",
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
-                      textAlign: TextAlign.center,
-                    )
-                  ],
-                ),
-                // Container(
-                //   margin: const EdgeInsets.all(10),
-                //   padding: const EdgeInsets.all(10),
-                //   width: screenWidth /5,
-                //   height: screenHeight / 12,
-                //   // decoration: BoxDecoration(
-                //   //   color: AppColor.lightOrange,
-                //   //   borderRadius: BorderRadius.circular(20),
-                //   // ),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.start,
-                //     children: <Widget>[
-                //       // Container(
-                //       //   decoration: BoxDecoration(
-                //       //     color: Colors.black12,
-                //       //     borderRadius: BorderRadius.circular(20),
-                //       //   ),
-                //       //   child:
-                //       Icon(Icons.monetization_on_rounded,
-                //             color: Colors.green,
-                //             size: screenHeight / 12
-                //       ,),
-                //       //),
-                //       // SizedBox(width: screenWidth / 20),
-                //       // const Text(
-                //       //   "Financial Aid",
-                //       //   style: h2Style,
-                //       //   textAlign: TextAlign.center,
-                //       // )
-                //     ],
-                //   ),
-                // ),
-              )),
-        ],
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Get.to(() => FinancialScreen());
+        },
+        label: Text('Financial Aid'),
+        icon: Icon(Icons.monetization_on_outlined),
+        backgroundColor: Colors.green,
       ),
+      body: loading
+          ? Center(child: CircularProgressIndicator())
+          : ListView.separated(
+              physics: BouncingScrollPhysics(),
+              padding: EdgeInsets.only(bottom: 80, top: 20),
+              itemCount: list.length,
+              separatorBuilder: (ctx, index) => const Divider(
+                indent: 8,
+                endIndent: 8,
+              ),
+              itemBuilder: (ctx, index) => ListTile(
+                onTap: () async {
+                  final Uri url = Uri.parse(list[index].href);
+                  //final url = 'https://vikaspedia.in' + list[index].href;
+                  await launchUrl(url);
+                },
+                title: Text(list[index].title),
+                subtitle: Text(list[index].desc),
+                //subtitle: Text(list[index].desc), // Display the href
+              ),
+            ),
     );
   }
 }

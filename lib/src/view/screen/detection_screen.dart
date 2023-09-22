@@ -1,7 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
+import 'package:lottie/lottie.dart';
+import 'package:office_app_store/core/app_style.dart';
+import 'package:office_app_store/src/view/widget/bottom_bar.dart';
 
 class Classifier extends StatefulWidget {
   static const String id = 'catDogClassifier';
@@ -225,28 +229,44 @@ class _Classifier extends State<Classifier> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                const SizedBox(
-                  height: 40,
+                Row(
+                  children: [
+                    Lottie.asset('assets/images/home_screen_animation.json',
+                        width: 200),
+                    Obx(() {
+                      return Expanded(
+                        child: Text("Hello, ${loggedInUser.value.name}",
+                            style: h1Style),
+                      );
+                    }),
+                  ],
                 ),
-                const Center(
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                  child: Container(
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 20),
                   child: Text(
                     'Plant Disease Detection',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24),
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 25),
                   ),
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 20,
                 ),
                 Center(
                   child: _loading
                       ? Container(
-                          width: 250,
+                          width: 200,
                           child: Column(
                             children: <Widget>[
                               Image.asset(
                                 'assets/img1.png',
                               ),
-                              const SizedBox(height: 50),
                             ],
                           ),
                         )
@@ -255,7 +275,7 @@ class _Classifier extends State<Classifier> {
                           children: <Widget>[
                             Stack(children: [
                               Container(
-                                height: 250,
+                                height: 200,
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     border: Border.all(
@@ -290,7 +310,7 @@ class _Classifier extends State<Classifier> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.only(top: 10),
+                  //margin: const EdgeInsets.only(top: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -306,8 +326,7 @@ class _Classifier extends State<Classifier> {
                               )),
                           const Text('Camera',
                               style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20.0)),
+                                  color: Colors.black, fontSize: 20.0)),
                         ],
                       ),
                       Column(
@@ -318,10 +337,10 @@ class _Classifier extends State<Classifier> {
                                 Icons.photo_library_outlined,
                                 size: 35,
                                 color: Colors.black,
-                              )), const Text('Gallery',
+                              )),
+                          const Text('Gallery',
                               style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20.0)),
+                                  color: Colors.black, fontSize: 20.0)),
                         ],
                       ),
                     ],
@@ -400,6 +419,27 @@ class _Classifier extends State<Classifier> {
                         ),
                       )
                     : Container(),
+                Row(
+                  children: [
+                    Container(
+                      child: Text(
+                        'New to Farming?',
+                        style: TextStyle(fontSize: 22),
+                      ),
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.black),
+                      child: Text(
+                        "Click here",
+                        style: TextStyle(fontSize: 22, color: Colors.white),
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
           ),

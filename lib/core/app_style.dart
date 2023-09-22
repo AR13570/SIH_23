@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 const h1Style = TextStyle(
-    fontSize: 60,
+    fontSize: 30,
     color: Colors.black,
     fontFamily: "Poppins",
     height: 1.4,
     fontWeight: FontWeight.w900);
 
 const h2Style = TextStyle(
-    fontSize: 22,
+    fontSize: 25,
     color: Colors.green,
     fontFamily: "Poppins",
     fontWeight: FontWeight.w600);
@@ -18,7 +18,6 @@ const h3Style = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w500,
     color: Colors.black);
-
 
 const h4Style = TextStyle(
     fontFamily: "Poppins",
@@ -40,6 +39,5 @@ const bodyStyle1 = TextStyle(
 
 final textFieldStyle = OutlineInputBorder(
   borderRadius: BorderRadius.circular(15),
-  borderSide:  const BorderSide(color: Colors.grey, width: 1.0),
+  borderSide: const BorderSide(color: Colors.grey, width: 1.0),
 );
-

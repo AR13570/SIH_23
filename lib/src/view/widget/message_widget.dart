@@ -18,7 +18,7 @@ class MessageWidget extends StatelessWidget {
       return ExpansionTile(
         //collapsedBackgroundColor: Colors.grey.shade300,
         textColor: Colors.black,
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.grey.shade200,
         childrenPadding: const EdgeInsets.all(15),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
