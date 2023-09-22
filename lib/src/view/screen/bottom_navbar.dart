@@ -8,9 +8,9 @@ import 'package:office_app_store/src/controller/MessageController.dart';
 import 'package:office_app_store/src/model/LoggedInUser.dart';
 import 'package:office_app_store/src/view/screen/cart_screen.dart';
 import 'package:office_app_store/src/view/screen/forum_screen.dart';
-import 'package:office_app_store/src/view/screen/feed_screen.dart';
+import 'package:office_app_store/src/view/screen/scheme_screen.dart';
 import 'package:office_app_store/src/view/screen/home_screen.dart';
-import 'package:office_app_store/src/view/screen/profile_screen.dart';
+import 'package:office_app_store/src/view/screen/crop_recommendation_screen.dart';
 import 'package:office_app_store/src/view/widget/bottom_bar.dart';
 import '../../controller/office_furniture_controller.dart';
 import 'modeltrain.dart';
@@ -20,8 +20,6 @@ final OfficeFurnitureController controller =
 final MessageController messageController = Get.put(MessageController());
 
 class BottomNavBar extends StatefulWidget {
-  BottomNavBar({Key? key}) : super(key: key);
-
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
@@ -48,7 +46,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   }
 
   final List<Widget> screens = [
-    const HomeScreen(),
+    //const HomeScreen(),
     Classifier(),
     const ForumScreen(),
     CropRecommendationScreen(),
@@ -57,7 +55,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    print(messageController.messages);
     return Scaffold(
       bottomNavigationBar: Obx(
         () {

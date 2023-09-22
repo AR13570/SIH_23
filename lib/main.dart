@@ -4,9 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:office_app_store/core/app_theme.dart';
-import 'package:office_app_store/src/view/screen/intro_screen.dart';
+import 'package:office_app_store/src/view/screen/bottom_navbar.dart';
 import 'package:office_app_store/src/view/screen/phone.dart';
-import 'package:office_app_store/src/view/screen/verify.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -32,10 +31,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: FirebaseAuth.instance.currentUser != null
-          ? 'intro' // User is already logged in, navigate to your main screen
+          ? 'home' // User is already logged in, navigate to your main screen
           : 'phone', // User is not logged in, navigate to the phone verification screen
       routes: {
-        'intro': (context) => IntroScreen(),
+        'home': (context) => BottomNavBar(),
         'phone': (context) => MyPhone(),
       },
       theme: AppTheme.lightTheme,

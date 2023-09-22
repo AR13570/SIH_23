@@ -112,5 +112,11 @@ class AppData {
     ),
   ];
 
-  static List<BottomNavigationItem> bottomNavigationItems = [BottomNavigationItem(const Icon(Icons.home), 'Home'), BottomNavigationItem(const Icon(Icons.add_shopping_cart_rounded), 'Shopping cart'), BottomNavigationItem(const Icon(Icons.bookmark), 'Favorite'), BottomNavigationItem(const Icon(Icons.person), 'Profile'),BottomNavigationItem(const Icon(Icons.feed), 'feed')];
+  static List<BottomNavigationItem> bottomNavigationItems = [
+    //BottomNavigationItem(const Icon(Icons.home), 'Home'),
+    BottomNavigationItem(const Icon(Icons.energy_savings_leaf), 'Detection'),
+    BottomNavigationItem(const Icon(Icons.forum_outlined), 'Forum'),
+    BottomNavigationItem(const Icon(Icons.add_chart), 'Suggestions'),
+    BottomNavigationItem(const Icon(Icons.feed), 'Feed')
+  ];
 }

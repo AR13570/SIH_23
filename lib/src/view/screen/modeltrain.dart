@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 
-
 class Classifier extends StatefulWidget {
   static const String id = 'catDogClassifier';
 
@@ -59,9 +58,7 @@ class _Classifier extends State<Classifier> {
     setState(() {
       _loading = false;
       _output = output!;
-      if(!_loading &&_output != null)
-      {
-      }
+      if (!_loading && _output != null) {}
     });
   }
 
@@ -71,6 +68,7 @@ class _Classifier extends State<Classifier> {
       labels: 'assets/models/Labels.txt',
     );
   }
+
   /*loadModel() async {
     await Tflite.loadModel(
       model: 'assets/catanddog/model_unquant.tflite',
@@ -95,37 +93,18 @@ class _Classifier extends State<Classifier> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.tealAccent,
         appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.teal,
-          title: Text(
-            'Disease Classifier',
+          title: const Text(
+            'Government Schemes',
             style: TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
           ),
-          iconTheme: IconThemeData(
-              color: Colors.white
-          ),
-          centerTitle: true,
-          automaticallyImplyLeading: true,
         ),
         body: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 24),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.004, 1],
-                colors: [
-                  Colors.teal,
-                  Colors.tealAccent,
-                ],
-              ),
-            ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
                   height: 40,
@@ -133,10 +112,7 @@ class _Classifier extends State<Classifier> {
                 Center(
                   child: Text(
                     'Detect dissorder',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 28),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 28),
                   ),
                 ),
                 SizedBox(
@@ -145,51 +121,51 @@ class _Classifier extends State<Classifier> {
                 Center(
                   child: _loading
                       ? Container(
-                    width: 250,
-                    child: Column(
-                      children: <Widget>[
-                        Image.asset('assets/img1.png'),
-                        SizedBox(height: 50),
-                      ],
-                    ),
-                  )
+                          width: 250,
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset('assets/img1.png'),
+                              SizedBox(height: 50),
+                            ],
+                          ),
+                        )
                       : Container(
-                      child: Column(
-                        children: <Widget>[
-                          Stack(
-                              children: [
-                                Container(
-                                  height: 250,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                        color: Colors.white,
-                                      ),
-                                      borderRadius: BorderRadius.all(Radius.circular(20))
-                                  ),
-                                ),
-                                Center(
-                                  child: Container(
+                          child: Column(
+                          children: <Widget>[
+                            Stack(children: [
+                              Container(
+                                height: 250,
+                                decoration: BoxDecoration(
                                     color: Colors.white,
-                                    height: 250,
-                                    child: Image.file(_image),
-                                  ),
+                                    border: Border.all(
+                                      color: Colors.white,
+                                    ),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                              ),
+                              Center(
+                                child: Container(
+                                  color: Colors.white,
+                                  height: 250,
+                                  child: Image.file(_image),
                                 ),
-                              ]
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          _output != null
-                              ? Container(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Text('${_output[0]['label'].substring(2)}',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20.0)),
-                          )
-                              : Container(),
-                        ],
-                      )),
+                              ),
+                            ]),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            _output != null
+                                ? Container(
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    child: Text(
+                                        '${_output[0]['label'].substring(2)}',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20.0)),
+                                  )
+                                : Container(),
+                          ],
+                        )),
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
@@ -200,32 +176,40 @@ class _Classifier extends State<Classifier> {
                     children: <Widget>[
                       IconButton(
                           onPressed: pickImage,
-                          icon: Icon(Icons.camera_alt_outlined,size: 35,color: Colors.white,)
-                      ),
+                          icon: Icon(
+                            Icons.camera_alt_outlined,
+                            size: 35,
+                            color: Colors.black,
+                          )),
                       IconButton(
                           onPressed: pickGalleryImage,
-                          icon: Icon(Icons.photo_library_outlined,size: 35,color: Colors.white,)
-                      ),
+                          icon: Icon(
+                            Icons.photo_library_outlined,
+                            size: 35,
+                            color: Colors.black,
+                          )),
                     ],
                   ),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                _loading?Container()
-                    :Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.only(top: 10),
-                    child: _output != null
-                        ? Container(
-                      child: IconButton(
-                          onPressed: (){
-                          },
-                          icon: Icon(Icons.info,size: 35,color: Colors.white,)
-                      ),
-                    )
-                        :Container()
-                )
+                _loading
+                    ? Container()
+                    : Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.only(top: 10),
+                        child: _output != null
+                            ? Container(
+                                child: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.info,
+                                      size: 35,
+                                      color: Colors.white,
+                                    )),
+                              )
+                            : Container())
               ],
             ),
           ),
