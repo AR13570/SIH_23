@@ -75,7 +75,7 @@ class _FeedScreen extends State<FeedScreen> {
                 child: Container(
                   margin: const EdgeInsets.all(10),
                   padding: const EdgeInsets.all(10),
-                  width: screenWidth * 3 / 5,
+                  width: screenWidth * 3 / 4,
                   height: screenHeight / 12,
                   decoration: BoxDecoration(
                     color: AppColor.lightOrange,
