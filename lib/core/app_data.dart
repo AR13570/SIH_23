@@ -117,6 +117,6 @@ class AppData {
     BottomNavigationItem(const Icon(Icons.energy_savings_leaf), 'Detection'),
     BottomNavigationItem(const Icon(Icons.forum_outlined), 'Forum'),
     BottomNavigationItem(const Icon(Icons.add_chart), 'Suggestions'),
-    BottomNavigationItem(const Icon(Icons.feed), 'Feed')
+    BottomNavigationItem(const Icon(Icons.feed), 'Schemes')
   ];
 }
