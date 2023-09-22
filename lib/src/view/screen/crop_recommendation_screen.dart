@@ -10,7 +10,10 @@ class CropRecommendationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Crop Recommendation'),
+        title: const Text('Crop Recommendation',
+        style: TextStyle(
+            color: Colors.black
+        ),),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

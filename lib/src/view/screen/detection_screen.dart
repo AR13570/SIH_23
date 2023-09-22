@@ -216,7 +216,7 @@ class _Classifier extends State<Classifier> {
           title: const Text(
             'FarmEz',
             style: TextStyle(
-                color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+                color: Colors.green, fontSize: 25, fontWeight: FontWeight.bold),
           ),
         ),
         body: SingleChildScrollView(
@@ -230,8 +230,8 @@ class _Classifier extends State<Classifier> {
                 ),
                 const Center(
                   child: Text(
-                    'Detect dissorder',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 28),
+                    'Plant Disease Detection',
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24),
                   ),
                 ),
                 const SizedBox(
@@ -295,20 +295,35 @@ class _Classifier extends State<Classifier> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      IconButton(
-                          onPressed: pickImage,
-                          icon: const Icon(
-                            Icons.camera_alt_outlined,
-                            size: 35,
-                            color: Colors.black,
-                          )),
-                      IconButton(
-                          onPressed: pickGalleryImage,
-                          icon: const Icon(
-                            Icons.photo_library_outlined,
-                            size: 35,
-                            color: Colors.black,
-                          )),
+                      Column(
+                        children: [
+                          IconButton(
+                              onPressed: pickImage,
+                              icon: const Icon(
+                                Icons.camera_alt_outlined,
+                                size: 35,
+                                color: Colors.black,
+                              )),
+                          const Text('Camera',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20.0)),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          IconButton(
+                              onPressed: pickGalleryImage,
+                              icon: const Icon(
+                                Icons.photo_library_outlined,
+                                size: 35,
+                                color: Colors.black,
+                              )), const Text('Gallery',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20.0)),
+                        ],
+                      ),
                     ],
                   ),
                 ),
