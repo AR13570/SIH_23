@@ -751,130 +751,203 @@ class _CropRecommendationScreenState extends State<CropRecommendationScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Row(
-              children: [
-                Image.asset(
-                  "assets/images/crop.png",
-                  width: 90,
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                const Expanded(
-                  child: Text(
-                    "Identify best crops to grow based on your location",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
+        child: SingleChildScrollView(
+
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Row(
                 children: [
-                  DropdownButton(
-                    hint: const Text("Pick a state"),
-                    value: state,
-                    items: stateList
-                        .map((e) => DropdownMenuItem(
-                              value: e.toString(),
-                              child: Text(e.toString().capitalize ?? ""),
-                            ))
-                        .toList(),
-                    onChanged: (String? selected) {
-                      if (selected != null) {
-                        state = selected;
-                        district = null;
-                        districtList = locationData[state];
-                        setState(() {});
-                      }
-                    },
+                  Image.asset(
+                    "assets/images/crop.png",
+                    width: 90,
                   ),
                   const SizedBox(
-                    height: 20,
+                    width: 16,
                   ),
-                  DropdownButton(
-                    hint: const Text("Pick a district"),
-                    value: district,
-                    items: districtList
-                        .map((e) => DropdownMenuItem(
-                              value: e.toString(),
-                              child: Text(e.toString().capitalize ?? ""),
-                            ))
-                        .toList(),
-                    onChanged: (String? selected) {
-                      if (selected != null) {
-                        district = selected;
-                        setState(() {});
-                      }
-                    },
-                  ),
-                  const SizedBox(
-                    height: 20,
+                  const Expanded(
+                    child: Text(
+                      "Identify best crops to grow based on your location",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ],
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (district != null) {
-                  controller.districtController.text = district!;
-                  controller.monthController.text =
-                      DateFormat('MMMM').format(DateTime.now());
-                  controller.fetchRecommendation();
-                } else {
-                  controller.result.value = "Please select a district";
-                }
-              },
-              child: const Text('Get Crop Recommendation'),
-            ),
-            const SizedBox(height: 16),
-            Obx(() {
-              String? recommendation = controller.result.value;
-              if (recommendation == "") {
-                return Container();
-              } else {
-                return Column(
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 18.0),
-                      child: Text(
-                        'Recommendation:',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
+                    DropdownButton(
+                      hint: const Text("Pick a state"),
+                      value: state,
+                      items: stateList
+                          .map((e) => DropdownMenuItem(
+                                value: e.toString(),
+                                child: Text(e.toString().capitalize ?? ""),
+                              ))
+                          .toList(),
+                      onChanged: (String? selected) {
+                        if (selected != null) {
+                          state = selected;
+                          district = null;
+                          districtList = locationData[state];
+                          setState(() {});
+                        }
+                      },
                     ),
-                    Text(
-                      'Whole Year Crops :',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    const SizedBox(
+                      height: 20,
                     ),
-                    Text(
-                      controller.wholeYear.value,
-                      style: TextStyle(fontSize: 18),
+                    DropdownButton(
+                      hint: const Text("Pick a district"),
+                      value: district,
+                      items: districtList
+                          .map((e) => DropdownMenuItem(
+                                value: e.toString(),
+                                child: Text(e.toString().capitalize ?? ""),
+                              ))
+                          .toList(),
+                      onChanged: (String? selected) {
+                        if (selected != null) {
+                          district = selected;
+                          setState(() {});
+                        }
+                      },
                     ),
-                    SizedBox(
-                      height: 16,
+                    const SizedBox(
+                      height: 20,
                     ),
-                    Text(
-                      'Top Crops :',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      controller.topCrops.value,
-                      style: TextStyle(fontSize: 18),
-                      textAlign: TextAlign.center,
-                    )
                   ],
-                );
-              }
-            }),
-          ],
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (district != null) {
+                    controller.districtController.text = district!;
+                    controller.monthController.text =
+                        DateFormat('MMMM').format(DateTime.now());
+                    controller.fetchRecommendation();
+                  } else {
+                    controller.result.value = "Please select a district";
+                  }
+                },
+                child: const Text('Get Crop Recommendation'),
+              ),
+              const SizedBox(height: 16),
+              Obx(() {
+                String? recommendation = controller.result.value;
+                if (recommendation == "") {
+                  return Container();
+                } else {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 18.0),
+                        child: Text(
+                          'Recommendation:',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                      ),
+                      // Text(
+                      //   'Whole Year Crops :',
+                      //   style:
+                      //       TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      // ),
+                      // Text(
+                      //   controller.wholeYearList.toString(),
+                      //   style: TextStyle(fontSize: 18),
+                      // ),
+                      // SizedBox(
+                      //   height: 16,
+                      // ),
+                      // Text(
+                      //   'Top Crops :',
+                      //   style:
+                      //       TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      // ),
+                      // Text(
+                      //   controller.topCrops.toString(),
+                      //   style: TextStyle(fontSize: 18),
+                      //   textAlign: TextAlign.center,
+                      // )
+
+                      if (controller.wholeYearList.value.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 18.0),
+                          child: Text(
+                            'Whole Year Crops:',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                        ),
+                      if (controller.wholeYearList.value.isNotEmpty)
+                        ListView.builder(
+                          physics: ClampingScrollPhysics(),
+                          itemCount: controller.wholeYearList.value.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              title: Text(
+                                controller.wholeYearList.value[index],
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            );
+                          },
+                        ),
+
+                      // Top Crops ListView.builder
+                      if (controller.topCrops.value.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 18.0),
+                          child: Text(
+                            'Top Crops:',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                        ),
+                      if (controller.topCrops.value.isNotEmpty)
+                        ListView.builder(
+                          physics: ClampingScrollPhysics(),
+                          itemCount: controller.topCrops.value.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            var entry = controller.topCrops.value.entries.elementAt(index);
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${entry.key}',
+                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                ),
+                                ListView.builder(
+                                  physics: ClampingScrollPhysics(),
+
+                                  itemCount: entry.value.length,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, i) {
+                                    return ListTile(
+                                      title: Text(
+                                        entry.value[i],
+                                        style: TextStyle(fontSize: 18),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                SizedBox(height: 16),
+                              ],
+                            );
+                          },
+                        ),
+                    ],
+                  );
+                }
+              }),
+            ],
+          ),
         ),
       ),
     );
@@ -885,15 +958,14 @@ class CropRecommendationController extends GetxController {
   TextEditingController districtController = TextEditingController();
   TextEditingController monthController = TextEditingController();
   RxString result = RxString('');
-  RxString wholeYear = RxString('');
-  RxString topCrops = RxString('');
+  RxList<dynamic> wholeYearList = RxList();
+  RxMap<dynamic, List<dynamic>> topCrops = RxMap();
 
   void fetchRecommendation() async {
     final district = districtController.text;
     final month = monthController.text;
 
-    final apiUrl =
-        'http://192.168.89.132:5000/crop'; // Update with your API endpoint
+    final apiUrl = 'http://192.168.89.132:5000/crop'; // Update with your API endpoint
     final response = await http.post(
       Uri.parse(apiUrl),
       headers: {
@@ -907,16 +979,22 @@ class CropRecommendationController extends GetxController {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      wholeYear.value =
-          data['whole_year_crop'].toString() ?? 'No recommendation available';
-      topCrops.value =
-          data['top_crop'].toString() ?? 'No top crop recommendation available';
 
-      result.value =
-          'Whole Year Crop: ${wholeYear.value}\nTop Crop: ${topCrops.value}';
+      // Check if the data types are as expected
+      if (data['whole_year_crop'] is List && data['top_crop'] is Map) {
+        wholeYearList.value=(List<dynamic>.from(data['whole_year_crop']));
+        topCrops.value
+        =Map<dynamic, List<dynamic>>.from(data['top_crop']);
+
+        result.value =
+        'Whole Year Crop: ${wholeYearList.toString()}\nTop Crop: ${topCrops.toString()}';
+      } else {
+        result.value = 'Error: Invalid data format in response';
+      }
     } else {
       result.value =
-          'Error: Unable to fetch recommendation${response.statusCode}';
+      'Error: Unable to fetch recommendation ${response.statusCode}';
     }
   }
+
 }
