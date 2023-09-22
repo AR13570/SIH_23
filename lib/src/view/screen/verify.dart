@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,40 +8,49 @@ import 'package:pinput/pinput.dart';
 import 'intro_screen.dart';
 
 class MyVerify extends StatefulWidget {
-  const MyVerify({Key? key}) : super(key: key);
+  String name, phone, district, state;
+  bool isExpert;
+  MyVerify(
+      {Key? key,
+      required this.isExpert,
+      required this.district,
+      required this.state,
+      required this.phone,
+      required this.name})
+      : super(key: key);
 
   @override
   State<MyVerify> createState() => _MyVerifyState();
 }
 
 class _MyVerifyState extends State<MyVerify> {
-  final FirebaseAuth auth= FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
           fontSize: 20,
           color: Color.fromRGBO(30, 60, 87, 1),
           fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
-        border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
+        border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
         borderRadius: BorderRadius.circular(20),
       ),
     );
 
     final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: Color.fromRGBO(114, 178, 238, 1)),
+      border: Border.all(color: const Color.fromRGBO(114, 178, 238, 1)),
       borderRadius: BorderRadius.circular(8),
     );
 
     final submittedPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration?.copyWith(
-        color: Color.fromRGBO(234, 239, 243, 1),
+        color: const Color.fromRGBO(234, 239, 243, 1),
       ),
     );
-    var code="";
+    var code = "";
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -49,7 +59,7 @@ class _MyVerifyState extends State<MyVerify> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios_rounded,
             color: Colors.black,
           ),
@@ -57,35 +67,27 @@ class _MyVerifyState extends State<MyVerify> {
         elevation: 0,
       ),
       body: Container(
-        margin: EdgeInsets.only(left: 25, right: 25),
+        margin: const EdgeInsets.only(left: 25, right: 25),
         alignment: Alignment.center,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/img1.png',
-                width: 150,
-                height: 150,
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              Text(
+              const Text(
                 "Phone Verification",
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 "We need to register your phone without getting started!",
                 style: TextStyle(
                   fontSize: 16,
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Pinput(
@@ -95,13 +97,13 @@ class _MyVerifyState extends State<MyVerify> {
                 // submittedPinTheme: submittedPinTheme,
 
                 showCursor: true,
-                onChanged: (value){
-                  code=value;
+                onChanged: (value) {
+                  code = value;
                 },
 
                 onCompleted: (pin) => print(pin),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               SizedBox(
@@ -113,16 +115,28 @@ class _MyVerifyState extends State<MyVerify> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     onPressed: () async {
-                      try{
-                        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: MyPhone.verify, smsCode: code);
+                      try {
+                        PhoneAuthCredential credential =
+                            PhoneAuthProvider.credential(
+                                verificationId: MyPhone.verify, smsCode: code);
                         await auth.signInWithCredential(credential);
+                        print("here");
+                        FirebaseFirestore.instance
+                            .collection("users")
+                            .doc(widget.phone)
+                            .set({
+                          "district": widget.district,
+                          "state": widget.state,
+                          "name": widget.name,
+                          "isExpert": widget.isExpert
+                        }).then((value) => print("done"));
+
                         Get.to(const IntroScreen());
-                      }
-                      catch(e){
+                      } catch (e) {
                         print("wrong otp");
                       }
                     },
-                    child: Text("Verify Phone Number")),
+                    child: const Text("Verify Phone Number")),
               ),
               Row(
                 children: [
@@ -131,10 +145,10 @@ class _MyVerifyState extends State<MyVerify> {
                         Navigator.pushNamedAndRemoveUntil(
                           context,
                           'phone',
-                              (route) => false,
+                          (route) => false,
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         "Edit Phone Number ?",
                         style: TextStyle(color: Colors.black),
                       ))

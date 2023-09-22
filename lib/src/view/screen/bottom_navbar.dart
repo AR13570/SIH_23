@@ -1,13 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:office_app_store/core/app_color.dart';
 import 'package:office_app_store/core/app_data.dart';
 import 'package:office_app_store/src/controller/MessageController.dart';
+import 'package:office_app_store/src/model/LoggedInUser.dart';
 import 'package:office_app_store/src/view/screen/cart_screen.dart';
 import 'package:office_app_store/src/view/screen/forum_screen.dart';
-import 'package:office_app_store/src/view/screen/feedscreen.dart';
+import 'package:office_app_store/src/view/screen/feed_screen.dart';
 import 'package:office_app_store/src/view/screen/home_screen.dart';
 import 'package:office_app_store/src/view/screen/profile_screen.dart';
+import 'package:office_app_store/src/view/widget/bottom_bar.dart';
 import '../../controller/office_furniture_controller.dart';
 import 'modeltrain.dart';
 
@@ -15,15 +19,40 @@ final OfficeFurnitureController controller =
     Get.put(OfficeFurnitureController());
 final MessageController messageController = Get.put(MessageController());
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatefulWidget {
   BottomNavBar({Key? key}) : super(key: key);
+
+  @override
+  State<BottomNavBar> createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
+  @override
+  initState() {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser?.phoneNumber?.substring(3))
+        .get()
+        .then((value) {
+      print("here");
+      loggedInUser.value = LoggedInUser(
+          name: value['name'],
+          phone: FirebaseAuth.instance.currentUser?.phoneNumber?.substring(3) ??
+              "",
+          district: value['district'],
+          state: value['state'],
+          isExpert: value['isExpert']);
+    });
+
+    super.initState();
+  }
 
   final List<Widget> screens = [
     const HomeScreen(),
     Classifier(),
-    ForumScreen(),
+    const ForumScreen(),
     CropRecommendationScreen(),
-    feedScreen()
+    FeedScreen()
   ];
 
   @override

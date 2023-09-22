@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:office_app_store/src/controller/MessageController.dart';
 import 'package:office_app_store/src/model/messageModel.dart';
+import 'package:office_app_store/src/view/widget/bottom_bar.dart';
 import 'package:office_app_store/src/view/widget/post_bottom_sheet.dart';
 import 'package:office_app_store/src/view/widget/reply_widget.dart';
 
@@ -42,9 +43,12 @@ class MessageWidget extends StatelessWidget {
                 ),
                 Chip(
                   label: Text("${message.likes.length}"),
-                  deleteIcon: Icon(!message.likes.contains(loggedInUser)
-                      ? Icons.add
-                      : Icons.remove),
+                  deleteIcon: Icon(
+                    !message.likes.contains(loggedInUser.value.phone)
+                        ? Icons.thumb_up
+                        : Icons.thumb_down,
+                    size: 17,
+                  ),
                   onDeleted: () {
                     messageController.like(
                       messageType: MessageType.post,
@@ -74,7 +78,7 @@ class MessageWidget extends StatelessWidget {
                 .map((Reply reply) => ReplyWidget(
                       reply: reply,
                       messageId: message.messageId,
-                      selected: reply.likes.contains(loggedInUser),
+                      selected: reply.likes.contains(loggedInUser.value.phone),
                     ))
                 .toList()
             : [

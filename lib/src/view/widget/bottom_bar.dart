@@ -1,5 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:office_app_store/src/model/LoggedInUser.dart';
 import '../../../core/app_style.dart';
+
+Rx<LoggedInUser> loggedInUser = LoggedInUser(
+        name: "name",
+        phone: "phone",
+        district: "district",
+        state: "state",
+        isExpert: false)
+    .obs;
 
 class BottomBar extends StatelessWidget {
   final VoidCallback? onTap;

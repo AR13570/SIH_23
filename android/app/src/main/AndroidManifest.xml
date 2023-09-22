@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.office_app_store">
    <application
-        android:label="office_app_store"
+        android:label="farmEz"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
