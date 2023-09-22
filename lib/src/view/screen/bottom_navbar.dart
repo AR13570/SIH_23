@@ -13,7 +13,7 @@ import 'package:office_app_store/src/view/screen/home_screen.dart';
 import 'package:office_app_store/src/view/screen/crop_recommendation_screen.dart';
 import 'package:office_app_store/src/view/widget/bottom_bar.dart';
 import '../../controller/office_furniture_controller.dart';
-import 'modeltrain.dart';
+import 'detection_screen.dart';
 
 final OfficeFurnitureController controller =
     Get.put(OfficeFurnitureController());

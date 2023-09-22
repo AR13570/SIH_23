@@ -25,19 +25,18 @@ class FinancialScreen extends StatelessWidget {
             return ListView.builder(
               itemCount: _c.subsidiaries.length,
               itemBuilder: (context, int index) => ExpansionTile(
-                title: Text(_c.subsidiaries[index].name),
-                subtitle: InkWell(
-                  child: Text(_c.subsidiaries[index].web),
-                  onTap: () async {
-                    String formattedUrl = _c.subsidiaries[index].web;
-                    if (!formattedUrl.contains("http")) {
-                      formattedUrl = "http://$formattedUrl";
-                    }
-                    final Uri url = Uri.parse(formattedUrl);
-                    //final url = 'https://vikaspedia.in' + list[index].href;
-                    await launchUrl(url);
-                  },
-                ),
+                title: InkWell(
+                    onTap: () async {
+                      String formattedUrl = _c.subsidiaries[index].web;
+                      if (!formattedUrl.contains("http")) {
+                        formattedUrl = "http://$formattedUrl";
+                      }
+                      final Uri url = Uri.parse(formattedUrl);
+                      //final url = 'https://vikaspedia.in' + list[index].href;
+                      await launchUrl(url);
+                    },
+                    child: Text(_c.subsidiaries[index].name)),
+                subtitle: Text(_c.subsidiaries[index].web),
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -58,7 +57,8 @@ class FinancialScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.download),
         onPressed: () async {
-          final Uri url = Uri.parse("");
+          final Uri url = Uri.parse(
+              "https://drive.google.com/uc?id=1TSZ5ENkrKQ1K_qJIuVbyGwAs2mqQWG6B&export=download");
           await launchUrl(url);
         },
       ),
