@@ -252,7 +252,8 @@ class _Classifier extends State<Classifier> {
                           width: 250,
                           child: Column(
                             children: <Widget>[
-                              Image.asset('assets/img1.png'),
+                              Image.asset('assets/img1.png',
+                                  ),
                               SizedBox(height: 50),
                             ],
                           ),
