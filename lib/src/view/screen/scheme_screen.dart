@@ -42,7 +42,7 @@ class _FeedScreen extends State<FeedScreen> {
       appBar: AppBar(
         title: const Text(
           'Government Schemes',
-          style: TextStyle(color: Colors.green),
+          style: h2Style,
         ),
       ),
       body: Stack(
@@ -72,36 +72,58 @@ class _FeedScreen extends State<FeedScreen> {
                 onTap: () {
                   Get.to(() => FinancialScreen());
                 },
-                child: Container(
-                  margin: const EdgeInsets.all(10),
-                  padding: const EdgeInsets.all(10),
-                  width: screenWidth * 3 / 4,
-                  height: screenHeight / 12,
-                  decoration: BoxDecoration(
-                    color: AppColor.lightOrange,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black12,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Icon(Icons.monetization_on_outlined,
-                            color: Colors.yellowAccent,
-                            size: screenHeight / 16),
-                      ),
-                      SizedBox(width: screenWidth / 20),
-                      const Text(
-                        "Financial Aid",
-                        style: h2Style,
-                        textAlign: TextAlign.center,
-                      )
-                    ],
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                      child: Icon(Icons.monetization_on_rounded,
+                        color: Colors.green,
+                        size: screenHeight / 12
+                        ,)
+                    ),
+                    Text("Financial Aid",
+                      style: TextStyle(
+                          fontFamily: "Poppins",
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
+                      textAlign: TextAlign.center,
+                    )
+                  ],
                 ),
+                // Container(
+                //   margin: const EdgeInsets.all(10),
+                //   padding: const EdgeInsets.all(10),
+                //   width: screenWidth /5,
+                //   height: screenHeight / 12,
+                //   // decoration: BoxDecoration(
+                //   //   color: AppColor.lightOrange,
+                //   //   borderRadius: BorderRadius.circular(20),
+                //   // ),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.start,
+                //     children: <Widget>[
+                //       // Container(
+                //       //   decoration: BoxDecoration(
+                //       //     color: Colors.black12,
+                //       //     borderRadius: BorderRadius.circular(20),
+                //       //   ),
+                //       //   child:
+                //       Icon(Icons.monetization_on_rounded,
+                //             color: Colors.green,
+                //             size: screenHeight / 12
+                //       ,),
+                //       //),
+                //       // SizedBox(width: screenWidth / 20),
+                //       // const Text(
+                //       //   "Financial Aid",
+                //       //   style: h2Style,
+                //       //   textAlign: TextAlign.center,
+                //       // )
+                //     ],
+                //   ),
+                // ),
               )),
         ],
       ),

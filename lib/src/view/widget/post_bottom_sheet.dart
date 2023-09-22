@@ -12,7 +12,7 @@ class PostBottomSheet extends StatelessWidget {
   PostBottomSheet({super.key, required this.messageType, this.messageId});
 
   final TextEditingController _messageTextController =
-      TextEditingController(text: "random text ${Random().nextInt(100)}");
+      TextEditingController();
   final RxBool isExpert = false.obs;
   @override
   Widget build(BuildContext context) {
