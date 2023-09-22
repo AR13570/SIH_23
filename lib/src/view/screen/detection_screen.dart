@@ -428,12 +428,17 @@ class _Classifier extends State<Classifier> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                   decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        Colors.green.shade500,
+                        Colors.green.shade500,
+                        Colors.green.shade200
+                      ], begin: Alignment.bottomLeft, end: Alignment.topRight),
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.green.shade300),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
+                      const Expanded(
                         child: Text(
                           'New to Farming?',
                           style: TextStyle(

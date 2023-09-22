@@ -53,6 +53,9 @@ dependencies:
   image_picker: ^0.8.6
   flutter_tflite: ^1.0.1
   lottie:
+  rounded_expansion_tile: ^0.0.13
+  expansion_tile_card: ^3.0.0
+  expansion_tile_group: ^1.2.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

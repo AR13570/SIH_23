@@ -17,11 +17,24 @@ class ReplyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(reply.message),
-        Chip(
+    return ListTile(
+        leading: CircleAvatar(
+          radius: 12,
+          child: Icon(
+            Icons.person,
+            color: Colors.white,
+            size: 12,
+          ),
+          backgroundColor: Colors.grey,
+        ),
+        title: Text(
+          reply.message,
+          style: TextStyle(fontSize: 16),
+        ),
+        subtitle: Text(
+          reply.sender,
+        ),
+        trailing: Chip(
           label: Text("${reply.likes.length}"),
           deleteIcon: Icon(
             !selected ? Icons.thumb_up : Icons.thumb_down,
@@ -33,8 +46,6 @@ class ReplyWidget extends StatelessWidget {
                 messageId: messageId,
                 postId: reply.replyId);
           },
-        )
-      ],
-    );
+        ));
   }
 }

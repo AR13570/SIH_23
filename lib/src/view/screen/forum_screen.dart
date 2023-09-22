@@ -1,3 +1,4 @@
+import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -15,7 +16,7 @@ class ForumScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Q&A Forum", style: h2Style),
+        title: const Text("Agro Community", style: h2Style),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -28,19 +29,19 @@ class ForumScreen extends StatelessWidget {
         backgroundColor: Colors.green,
       ),
       body: Obx(() {
-        return ListView.separated(
-          shrinkWrap: true,
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) => MessageWidget(
-            message: messageController.messages[index],
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 20),
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: ExpansionTileGroup(
+              spaceBetweenItem: 16,
+              children: messageController.messages
+                  .map((element) => messageWidget(
+                        message: element,
+                      ) as ExpansionTileItem)
+                  .toList(),
+            ),
           ),
-          separatorBuilder: (context, index) => Container(
-            margin: const EdgeInsets.symmetric(horizontal: 15),
-            color: Colors.grey,
-            height: 1,
-          ),
-          itemCount: messageController.messages.length,
         );
       }),
     );
