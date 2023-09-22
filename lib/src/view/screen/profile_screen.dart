@@ -56,7 +56,7 @@ class CropRecommendationController extends GetxController {
     final district = districtController.text;
     final month = monthController.text;
 
-    final apiUrl = 'http://192.168.29.65:5000/crop'; // Update with your API endpoint
+    final apiUrl = 'http://192.168.89.132:5000/crop'; // Update with your API endpoint
     final response = await http.post(
       Uri.parse(apiUrl),
       headers: {
