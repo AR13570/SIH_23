@@ -887,27 +887,47 @@ class _CropRecommendationScreenState extends State<CropRecommendationScreen> {
                         ):CircularProgressIndicator(color: Colors.lightGreen,),
 
                       controller.wholeYearList.value.isNotEmpty?
-                        ListView.builder(
-                          physics: ClampingScrollPhysics(),
-                          itemCount: controller.wholeYearList.value.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                              title: Container(
+                        // ListView.builder(
+                        //   physics: ClampingScrollPhysics(),
+                        //   itemCount: controller.wholeYearList.value.length,
+                        //   shrinkWrap: true,
+                        //   itemBuilder: (context, index) {
+                        //     return ListTile(
+                        //       title: Container(
+                        //
+                        //         padding: const EdgeInsets.all(16.0),
+                        //     decoration: BoxDecoration(
+                        //     color: Colors.lightGreen,
+                        //       borderRadius: BorderRadius.only(topLeft: Radius.circular(30),bottomRight: Radius.circular(30)),
+                        //     ),
+                        //         child: Text(
+                        //           controller.wholeYearList.value[index],
+                        //           style: TextStyle(fontSize: 18,color: Colors.white),
+                        //         ),
+                        //       ),
+                        //     );
+                        //   },
+                        // ):CircularProgressIndicator(color: Colors.lightGreen,),
+                      Align(
+                alignment: Alignment.centerLeft,
+                        child: Wrap(
+                          children: controller.wholeYearList.map((element) => Container(
 
-                                padding: const EdgeInsets.all(16.0),
-                            decoration: BoxDecoration(
-                            color: Colors.lightGreen,
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(30),bottomRight: Radius.circular(30)),
-                            ),
-                                child: Text(
-                                  controller.wholeYearList.value[index],
-                                  style: TextStyle(fontSize: 18,color: Colors.white),
-                                ),
-                              ),
-                            );
-                          },
-                        ):CircularProgressIndicator(color: Colors.lightGreen,),
+                                     padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 15),
+                margin:EdgeInsets.all(8.0),
+                                   decoration: BoxDecoration(
+                                     border: Border.all(color: Colors.lightGreen),
+                                   //color: Colors.lightGreen,
+                                     borderRadius: BorderRadius.circular(15),
+                                  ),
+                                       child: Text(
+                                         element,
+                                         style: TextStyle(fontSize: 18,color: Colors.lightGreen),
+                                       ),
+
+                        )).toList(),),
+                      ):CircularProgressIndicator(color: Colors.lightGreen,),
+
 
                       // Top Crops ListView.builder
                       if (controller.topCrops.value.isNotEmpty)
@@ -919,51 +939,104 @@ class _CropRecommendationScreenState extends State<CropRecommendationScreen> {
                                 fontWeight: FontWeight.bold, fontSize: 20),
                           ),
                         ),
-                      if (controller.topCrops.value.isNotEmpty)
-                        ListView.builder(
-                          physics: ClampingScrollPhysics(),
-                          itemCount: controller.topCrops.value.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            var entry = controller.topCrops.value.entries.elementAt(index);
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    '${entry.key}',
-                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                ListView.builder(
-                                  physics: ClampingScrollPhysics(),
 
-                                  itemCount: entry.value.length,
-                                  shrinkWrap: true,
-                                  itemBuilder: (context, i) {
-                                    return ListTile(
-                                      title: Container(
-                                        padding: const EdgeInsets.all(16.0),
-                                        decoration: BoxDecoration(
-                                          color: Colors.lightGreen,
-                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(30),bottomRight: Radius.circular(30)),
-                                        ),
-                                        //color: Colors.green,
-                                        child: Text(
-                                          entry.value[i],
-                                          style: TextStyle(fontSize: 18,
-                                          color: Colors.white),
-                                        ),
-                                      ),
-                                    );
-                                  },
+                        // ListView.builder(
+                        //   physics: ClampingScrollPhysics(),
+                        //   itemCount: controller.topCrops.value.length,
+                        //   shrinkWrap: true,
+                        //   itemBuilder: (context, index) {
+                        //     var entry = controller.topCrops.value.entries.elementAt(index);
+                        //     return Column(
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //       children: [
+                        //         Padding(
+                        //           padding: const EdgeInsets.all(8.0),
+                        //           child: Text(
+                        //             '${entry.key}',
+                        //             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        //           ),
+                        //         ),
+                        //         // Wrap(
+                        //         // children: controller.topCrops.entries.map((element) => Container(
+                        //         // padding: const EdgeInsets.all(16.0),
+                        //         // margin:EdgeInsets.all(16.0),
+                        //         // decoration: BoxDecoration(
+                        //         // border: Border.all(color: Colors.lightGreen),
+                        //         // //color: Colors.lightGreen,
+                        //         // borderRadius: BorderRadius.only(topLeft: Radius.circular(30),bottomRight: Radius.circular(30)),
+                        //         // ),
+                        //         // child: Text(
+                        //         // element.value as String,
+                        //         // style: TextStyle(fontSize: 18,color: Colors.lightGreen),
+                        //         // ),
+                        //         //
+                        //         // )).toList()),
+                        //         // ListView.builder(
+                        //         //   physics: ClampingScrollPhysics(),
+                        //         //
+                        //         //   itemCount: entry.value.length,
+                        //         //   shrinkWrap: true,
+                        //         //   itemBuilder: (context, i) {
+                        //         //     return ListTile(
+                        //         //       title: Container(
+                        //         //         padding: const EdgeInsets.all(16.0),
+                        //         //         decoration: BoxDecoration(
+                        //         //           color: Colors.lightGreen,
+                        //         //           borderRadius: BorderRadius.only(topLeft: Radius.circular(30),bottomRight: Radius.circular(30)),
+                        //         //         ),
+                        //         //         //color: Colors.green,
+                        //         //         child: Text(
+                        //         //           entry.value[i],
+                        //         //           style: TextStyle(fontSize: 18,
+                        //         //           color: Colors.white),
+                        //         //         ),
+                        //         //       ),
+                        //         //     );
+                        //         //   },
+                        //         // ),
+                        //         SizedBox(height: 16),
+                        //       ],
+                        //     );
+                        //   },
+                        // ),
+                      ListView.builder(
+                        physics: ClampingScrollPhysics(),
+                        itemCount: controller.topCrops.value.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          var entry = controller.topCrops.value.entries.elementAt(index);
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  '${entry.key}',
+                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(height: 16),
-                              ],
-                            );
-                          },
-                        ),
+                              ),
+                              Wrap(
+                                children: entry.value.map((value) {
+                                  return Container(
+                                    padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 15),
+                                    margin:EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.lightGreen),
+                                      //color: Colors.lightGreen,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Text(
+                                      value,
+                                      style: TextStyle(fontSize: 18,color: Colors.lightGreen),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          );
+                        },
+                      )
+
                     ],
                   );
                 }
@@ -987,7 +1060,7 @@ class CropRecommendationController extends GetxController {
     final district = districtController.text;
     final month = monthController.text;
 
-    final apiUrl = 'http://192.168.89.132:5000/crop'; // Update with your API endpoint
+    final apiUrl = 'http://192.168.29.65:5000/crop'; // Update with your API endpoint
     final response = await http.post(
       Uri.parse(apiUrl),
       headers: {
