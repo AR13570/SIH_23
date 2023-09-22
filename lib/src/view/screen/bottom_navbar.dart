@@ -59,11 +59,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
       bottomNavigationBar: Obx(
         () {
           return BottomNavigationBar(
+            selectedItemColor: Colors.green,
             unselectedItemColor: Colors.grey,
             currentIndex: controller.currentBottomNavItemIndex.value,
             showUnselectedLabels: true,
             onTap: controller.switchBetweenBottomNavigationItems,
-            fixedColor: AppColor.lightBlack,
+            //fixedColor: AppColor.lightBlack,
             items: AppData.bottomNavigationItems
                 .map(
                   (element) => BottomNavigationBarItem(
