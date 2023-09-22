@@ -5,10 +5,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
 import 'package:lottie/lottie.dart';
 import 'package:office_app_store/core/app_style.dart';
+import 'package:office_app_store/src/view/screen/bottom_navbar.dart';
 import 'package:office_app_store/src/view/widget/bottom_bar.dart';
 
 class Classifier extends StatefulWidget {
   static const String id = 'catDogClassifier';
+
+  const Classifier({super.key});
 
   @override
   _Classifier createState() => _Classifier();
@@ -231,8 +234,11 @@ class _Classifier extends State<Classifier> {
               children: <Widget>[
                 Row(
                   children: [
-                    Lottie.asset('assets/images/home_screen_animation.json',
-                        width: 200),
+                    Expanded(
+                      child: Lottie.asset(
+                        'assets/images/home_screen_animation.json',
+                      ),
+                    ),
                     Obx(() {
                       return Expanded(
                         child: Text("Hello, ${loggedInUser.value.name}",
@@ -419,26 +425,55 @@ class _Classifier extends State<Classifier> {
                         ),
                       )
                     : Container(),
-                Row(
-                  children: [
-                    Container(
-                      child: Text(
-                        'New to Farming?',
-                        style: TextStyle(fontSize: 22),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.green.shade300),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'New to Farming?',
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
-                    ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.black),
-                      child: Text(
-                        "Click here",
-                        style: TextStyle(fontSize: 22, color: Colors.white),
+                      SizedBox(
+                        width: 8,
                       ),
-                    )
-                  ],
+                      InkWell(
+                        onTap: () {
+                          controller.switchBetweenBottomNavigationItems(2);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: Colors.white),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Click here",
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Icon(
+                                Icons.chevron_right,
+                                color: Colors.green,
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),
