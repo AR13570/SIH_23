@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:intl/intl.dart';
+import 'package:office_app_store/core/app_style.dart';
 
 class CropRecommendationScreen extends StatefulWidget {
   @override
@@ -746,7 +747,7 @@ class _CropRecommendationScreenState extends State<CropRecommendationScreen> {
       appBar: AppBar(
         title: const Text(
           'Crop Recommendation',
-          style: TextStyle(color: Colors.black),
+          style: h2Style,
         ),
       ),
       body: Padding(
@@ -845,7 +846,7 @@ class _CropRecommendationScreenState extends State<CropRecommendationScreen> {
 
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 18.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: Text(
                           'Recommendation:',
                           style: TextStyle(
@@ -875,34 +876,43 @@ class _CropRecommendationScreenState extends State<CropRecommendationScreen> {
                       //   textAlign: TextAlign.center,
                       // )
 
-                      if (controller.wholeYearList.value.isNotEmpty)
+                      controller.wholeYearList.value.isNotEmpty?
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 18.0),
+                          padding: const EdgeInsets.all( 10.0),
                           child: Text(
                             'Whole Year Crops:',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20),
                           ),
-                        ),
-                      if (controller.wholeYearList.value.isNotEmpty)
+                        ):CircularProgressIndicator(color: Colors.lightGreen,),
+
+                      controller.wholeYearList.value.isNotEmpty?
                         ListView.builder(
                           physics: ClampingScrollPhysics(),
                           itemCount: controller.wholeYearList.value.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return ListTile(
-                              title: Text(
-                                controller.wholeYearList.value[index],
-                                style: TextStyle(fontSize: 18),
+                              title: Container(
+
+                                padding: const EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                            color: Colors.lightGreen,
+                              borderRadius: BorderRadius.only(topLeft: Radius.circular(30),bottomRight: Radius.circular(30)),
+                            ),
+                                child: Text(
+                                  controller.wholeYearList.value[index],
+                                  style: TextStyle(fontSize: 18,color: Colors.white),
+                                ),
                               ),
                             );
                           },
-                        ),
+                        ):CircularProgressIndicator(color: Colors.lightGreen,),
 
                       // Top Crops ListView.builder
                       if (controller.topCrops.value.isNotEmpty)
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 18.0),
+                          padding: const EdgeInsets.all(18.0),
                           child: Text(
                             'Top Crops:',
                             style: TextStyle(
@@ -919,9 +929,12 @@ class _CropRecommendationScreenState extends State<CropRecommendationScreen> {
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  '${entry.key}',
-                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    '${entry.key}',
+                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                                 ListView.builder(
                                   physics: ClampingScrollPhysics(),
@@ -930,9 +943,18 @@ class _CropRecommendationScreenState extends State<CropRecommendationScreen> {
                                   shrinkWrap: true,
                                   itemBuilder: (context, i) {
                                     return ListTile(
-                                      title: Text(
-                                        entry.value[i],
-                                        style: TextStyle(fontSize: 18),
+                                      title: Container(
+                                        padding: const EdgeInsets.all(16.0),
+                                        decoration: BoxDecoration(
+                                          color: Colors.lightGreen,
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(30),bottomRight: Radius.circular(30)),
+                                        ),
+                                        //color: Colors.green,
+                                        child: Text(
+                                          entry.value[i],
+                                          style: TextStyle(fontSize: 18,
+                                          color: Colors.white),
+                                        ),
                                       ),
                                     );
                                   },

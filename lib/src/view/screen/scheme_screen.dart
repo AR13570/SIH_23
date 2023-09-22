@@ -63,15 +63,38 @@ class _FeedScreen extends State<FeedScreen> {
                 indent: 8,
                 endIndent: 8,
               ),
-              itemBuilder: (ctx, index) => ListTile(
-                onTap: () async {
-                  final Uri url = Uri.parse(list[index].href);
-                  //final url = 'https://vikaspedia.in' + list[index].href;
-                  await launchUrl(url);
-                },
-                title: Text(list[index].title),
-                subtitle: Text(list[index].desc),
-                //subtitle: Text(list[index].desc), // Display the href
+              itemBuilder: (ctx, index) => Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(30),bottomRight: Radius.circular(30)),
+                  color: Colors.white12
+                ),
+                child: ListTile(
+                  onTap: () async {
+                    final Uri url = Uri.parse(list[index].href);
+                    //final url = 'https://vikaspedia.in' + list[index].href;
+                    await launchUrl(url);
+                  },
+                  title: Text(list[index].title,
+                  style: TextStyle(
+                    color: Colors.blueGrey
+                      ,
+                        fontSize: 17
+
+                  ),),
+                  trailing:  Icon(
+                      Icons.link
+                  ),
+                  subtitle: Text(list[index].desc,
+                    style: TextStyle(
+                        color: Colors.black38
+                        ,
+
+
+                    ),),
+
+                  //subtitle: Text(list[index].desc), // Display the href
+                ),
               ),
             ),
     );

@@ -52,7 +52,7 @@ dependencies:
   sms_autofill:
   image_picker: ^0.8.6
   flutter_tflite: ^1.0.1
-  lottie: ^2.6.0
+  lottie:
 dev_dependencies:
   flutter_test:
     sdk: flutter
