@@ -77,10 +77,8 @@ class _FeedScreen extends State<FeedScreen> {
                   },
                   title: Text(list[index].title,
                   style: TextStyle(
-                    color: Colors.blueGrey
-                      ,
-                        fontSize: 17
-
+                    color: Colors.blueGrey,
+                      fontSize: 17
                   ),),
                   trailing:  Icon(
                       Icons.link
