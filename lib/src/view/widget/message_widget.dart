@@ -43,6 +43,7 @@ ExpansionTileItem messageWidget({required Message message}) {
                 messageController.deleteComment(
                     messageType: MessageType.post,
                     messageId: message.messageId);
+                Get.back();
               });
         }
       },

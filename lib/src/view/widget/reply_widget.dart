@@ -29,6 +29,7 @@ class ReplyWidget extends StatelessWidget {
                       messageType: MessageType.reply,
                       messageId: messageId,
                       replyId: reply.replyId);
+                  Get.back();
                 });
           }
         },
