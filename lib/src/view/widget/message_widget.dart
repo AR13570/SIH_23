@@ -22,16 +22,16 @@ ExpansionTileItem messageWidget({required Message message}) {
     isHasTrailing: false,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.green)),
+        border: Border.all(color: Colors.grey)),
     textColor: Colors.black,
     backgroundColor: Colors.grey.shade200,
     childrenPadding: const EdgeInsets.all(15),
-    leading: CircleAvatar(
+    leading: const CircleAvatar(
+      backgroundColor: Colors.grey,
       child: Icon(
         Icons.person,
         color: Colors.white,
       ),
-      backgroundColor: Colors.grey,
     ),
     title: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,8 +57,8 @@ ExpansionTileItem messageWidget({required Message message}) {
               label: Text("${message.likes.length}"),
               deleteIcon: Icon(
                 !message.likes.contains(loggedInUser.value.phone)
-                    ? Icons.thumb_up
-                    : Icons.thumb_down,
+                    ? Icons.thumb_up_alt_outlined
+                    : Icons.thumb_up,
                 size: 17,
               ),
               onDeleted: () {
@@ -66,18 +66,6 @@ ExpansionTileItem messageWidget({required Message message}) {
                   messageType: MessageType.post,
                   messageId: message.messageId,
                 );
-              },
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            InkWell(
-              child: const Chip(label: Text("Reply")),
-              onTap: () {
-                Get.bottomSheet(PostBottomSheet(
-                  messageType: MessageType.reply,
-                  messageId: message.messageId,
-                ));
               },
             ),
           ],
@@ -97,19 +85,55 @@ ExpansionTileItem messageWidget({required Message message}) {
           )
         : Container(),
     children: message.replies.isNotEmpty
-        ? message.replies
-            .map((Reply reply) => ReplyWidget(
-                  reply: reply,
-                  messageId: message.messageId,
-                  selected: reply.likes.contains(loggedInUser.value.phone),
-                ))
-            .toList()
+        ? [
+            Column(
+              children: message.replies
+                  .map((Reply reply) => ReplyWidget(
+                        reply: reply,
+                        messageId: message.messageId,
+                        selected:
+                            reply.likes.contains(loggedInUser.value.phone),
+                      ))
+                  .toList(),
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            Center(
+              child: InkWell(
+                child: const Chip(
+                    label: Text(
+                  "Reply",
+                )),
+                onTap: () {
+                  Get.bottomSheet(PostBottomSheet(
+                    messageType: MessageType.reply,
+                    messageId: message.messageId,
+                  ));
+                },
+              ),
+            ),
+          ]
         : [
             Center(
               child: const Text(
                 "No comments yet",
               ),
-            )
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            Center(
+              child: InkWell(
+                child: const Chip(label: Text("Reply")),
+                onTap: () {
+                  Get.bottomSheet(PostBottomSheet(
+                    messageType: MessageType.reply,
+                    messageId: message.messageId,
+                  ));
+                },
+              ),
+            ),
           ],
   );
 }

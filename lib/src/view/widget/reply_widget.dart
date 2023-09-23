@@ -37,7 +37,7 @@ class ReplyWidget extends StatelessWidget {
         trailing: Chip(
           label: Text("${reply.likes.length}"),
           deleteIcon: Icon(
-            !selected ? Icons.thumb_up : Icons.thumb_down,
+            !selected ? Icons.thumb_up_alt_outlined : Icons.thumb_up,
             size: 17,
           ),
           onDeleted: () {
