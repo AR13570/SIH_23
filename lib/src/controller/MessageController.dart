@@ -35,10 +35,10 @@ class MessageController extends GetxController {
               .map((replyCollection) => replyCollection.docs
                   .map((replyData) => Reply(
                       replyId: replyData.id,
-                      //likes: replyData['likes'],
+                      isExpert: replyData['isExpert'],
                       likes: replyData['liked by'],
                       message: replyData['message'],
-                      sender: replyData['user']))
+                      name: replyData['user']))
                   .toList()));
           //finally bind the message list to the message collection
           return Message(
@@ -128,13 +128,13 @@ class MessageController extends GetxController {
   deleteComment(
       {required MessageType messageType,
       required String messageId,
-      String? postId}) {
+      String? replyId}) {
     DocumentReference messageDocument =
         FirebaseFirestore.instance.collection("message").doc(messageId);
     if (messageType == MessageType.post) {
       FirebaseFirestore.instance.collection("message").doc(messageId).delete();
     } else {
-      messageDocument.collection("replies").doc(postId!).delete();
+      messageDocument.collection("replies").doc(replyId).delete();
     }
   }
 }

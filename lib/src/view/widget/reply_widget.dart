@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:office_app_store/src/controller/MessageController.dart';
 import 'package:office_app_store/src/model/messageModel.dart';
+import 'package:office_app_store/src/view/widget/bottom_bar.dart';
 
 import '../screen/bottom_navbar.dart';
 
@@ -18,6 +19,19 @@ class ReplyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+        onLongPress: () {
+          if (reply.name == loggedInUser.value.name) {
+            Get.defaultDialog(
+                title: "Delete",
+                middleText: "Do you want to delete this message?",
+                onConfirm: () {
+                  messageController.deleteComment(
+                      messageType: MessageType.reply,
+                      messageId: messageId,
+                      replyId: reply.replyId);
+                });
+          }
+        },
         leading: CircleAvatar(
           radius: 12,
           child: Icon(
@@ -31,8 +45,21 @@ class ReplyWidget extends StatelessWidget {
           reply.message,
           style: TextStyle(fontSize: 16),
         ),
-        subtitle: Text(
-          reply.sender,
+        subtitle: Row(
+          children: [
+            Text(
+              reply.name,
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            if (reply.isExpert)
+              Icon(
+                Icons.check_circle,
+                color: Colors.blue,
+                size: 14,
+              )
+          ],
         ),
         trailing: Chip(
           label: Text("${reply.likes.length}"),

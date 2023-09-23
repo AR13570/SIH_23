@@ -34,6 +34,18 @@ ExpansionTileItem messageWidget({required Message message}) {
       ),
     ),
     title: InkWell(
+      onLongPress: () {
+        if (message.name == loggedInUser.value.name) {
+          Get.defaultDialog(
+              title: "Delete",
+              middleText: "Do you want to delete this message?",
+              onConfirm: () {
+                messageController.deleteComment(
+                    messageType: MessageType.post,
+                    messageId: message.messageId);
+              });
+        }
+      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

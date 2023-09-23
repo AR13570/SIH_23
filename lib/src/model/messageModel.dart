@@ -21,11 +21,12 @@ class Reply {
   String replyId;
   List<dynamic> likes;
   String message;
-  String sender;
-
+  String name;
+  bool isExpert;
   Reply(
       {required this.replyId,
       required this.likes,
       required this.message,
-      required this.sender});
+      required this.name,
+      required this.isExpert});
 }
