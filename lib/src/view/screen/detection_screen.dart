@@ -101,9 +101,7 @@ class _Classifier extends State<Classifier> {
       "Apply weekly preventative, disease-fighting fungicides starting at bud break to protect against spores from juniper hosts. Additional applications are not usually needed."
     ],
     "Apple Healthy": ["Maintain overall tree health for disease resistance."],
-    "Blueberry Healthy": [
-      "Maintain overall plant health for disease resistance."
-    ],
+    "Blueberry Healthy": ["Maintain overall plant health for disease resistance."],
     "Cherry Powdery Mildew": [
       "Disinfect pruning tools before use.",
       "Prune and discard diseased parts immediately.",
@@ -160,9 +158,7 @@ class _Classifier extends State<Classifier> {
       "Apply fixed copper (organic fungicide) every 10-14 days for disease control.",
       "Rotate peppers to a different location if infections are severe and use soil cover before planting."
     ],
-    "Pepper Bell Healthy": [
-      "Maintain overall pepper plant health for disease resistance."
-    ],
+    "Pepper Bell Healthy": ["Maintain overall pepper plant health for disease resistance."],
     "Potato Early Blight": [
       "Plant potato varieties resistant to the disease.",
       "Avoid overhead irrigation and ensure good plant spacing."
@@ -170,15 +166,9 @@ class _Classifier extends State<Classifier> {
     "Potato Late Blight": [
       "Manage late blight with prophylactic sprays of mancozeb and systemic fungicides at disease onset."
     ],
-    "Potato Healthy": [
-      "Maintain overall potato plant health for disease resistance."
-    ],
-    "Raspberry Healthy": [
-      "Maintain overall plant health for disease resistance."
-    ],
-    "Soybean Healthy": [
-      "Maintain overall soybean plant health for disease resistance."
-    ],
+    "Potato Healthy": ["Maintain overall potato plant health for disease resistance."],
+    "Raspberry Healthy": ["Maintain overall plant health for disease resistance."],
+    "Soybean Healthy": ["Maintain overall soybean plant health for disease resistance."],
     "Squash Powdery Mildew": [
       "Spray a mixture of baking soda and liquid, non-detergent soap on plants.",
       "Consider using mouthwash as an alternative treatment."
@@ -188,9 +178,7 @@ class _Classifier extends State<Classifier> {
       "Frequently establish new strawberry transplants and create new plantings.",
       "Older plants are more susceptible to severe infection."
     ],
-    "Strawberry Healthy": [
-      "Maintain overall strawberry plant health for disease resistance."
-    ],
+    "Strawberry Healthy": ["Maintain overall strawberry plant health for disease resistance."],
     "Tomato Bacterial Spot": [
       "Use pathogen-free seed or transplants and soak seeds in a bleach solution.",
       "Avoid overhead watering and handle plants when dry.",
@@ -205,9 +193,7 @@ class _Classifier extends State<Classifier> {
       "Clean up garden debris and fallen fruit.",
       "Inspect plants regularly and use fungicides with maneb, mancozeb, chlorothanolil, or fixed copper."
     ],
-    "Tomato Leaf Mold": [
-      "Use calcium chloride-based sprays or organic fungicides."
-    ],
+    "Tomato Leaf Mold": ["Use calcium chloride-based sprays or organic fungicides."],
     "Tomato Septoria Leaf Spot": [
       "Remove diseased leaves and improve air circulation.",
       "Use mulch, drip irrigation, and avoid overhead watering.",
@@ -230,10 +216,9 @@ class _Classifier extends State<Classifier> {
       "Use certified disease-free seed or treat your own seed.",
       "Inspect transplants prior to purchase and wash hands when handling plants."
     ],
-    "Tomato Healthy": [
-      "Maintain overall tomato plant health for disease resistance."
-    ]
+    "Tomato Healthy": ["Maintain overall tomato plant health for disease resistance."]
   };
+
 
   pickImage() async {
     var image = await picker.pickImage(source: ImageSource.camera);
@@ -260,7 +245,6 @@ class _Classifier extends State<Classifier> {
   List<String> getCureList(String key) {
     return Disease_cure[key] ?? ['No cure found'];
   }
-
   List<String> getDiseaseList(String key) {
     return disease_prevention[key] ?? ['No cure found'];
   }
@@ -397,8 +381,7 @@ class _Classifier extends State<Classifier> {
                                 ? Container(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 10),
-                                    child: Text(
-                                        '${_output!.length > 0 ? _output![0]['label'] : ""}',
+                                    child: Text('${_output![0]['label']}',
                                         style: const TextStyle(
                                             color: Colors.black,
                                             fontSize: 20.0)),
@@ -479,9 +462,7 @@ class _Classifier extends State<Classifier> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
+                            SizedBox(height: 10,),
                             // ListView.builder(
                             //   shrinkWrap: true,
                             //   itemCount:
@@ -503,27 +484,20 @@ class _Classifier extends State<Classifier> {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Wrap(
-                                children: getCureList(_output![0]['label'])
-                                    .map((element) => Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 10, horizontal: 15),
-                                          margin: EdgeInsets.all(8.0),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.lightGreen),
-                                            //color: Colors.lightGreen,
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
-                                          child: Text(
-                                            element,
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.lightGreen),
-                                          ),
-                                        ))
-                                    .toList(),
-                              ),
+                                children: getCureList(_output![0]['label']).map((element) => Container(
+                                  padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 15),
+                                  margin:EdgeInsets.all(8.0),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.lightGreen),
+                                    //color: Colors.lightGreen,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Text(
+                                    element,
+                                    style: TextStyle(fontSize: 18,color: Colors.lightGreen),
+                                  ),
+
+                                )).toList(),),
                             ),
                             const SizedBox(height: 20), // Add some spacing
                             // Display disease prevention information here
@@ -535,9 +509,7 @@ class _Classifier extends State<Classifier> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
+                            SizedBox(height: 10,),
                             // Container(
                             //   padding: const EdgeInsets.all(10),
                             //   //margin:EdgeInsets.all(8.0),
@@ -552,27 +524,22 @@ class _Classifier extends State<Classifier> {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Wrap(
-                                children: getDiseaseList(_output![0]['label'])
-                                    .asMap()
-                                    .entries
-                                    .map((entry) {
+                                children: getDiseaseList(_output![0]['label']).asMap().entries.map((entry) {
                                   final int index = entry.key;
                                   final String element = entry.value;
                                   return Container(
                                     padding: const EdgeInsets.all(10),
                                     margin: EdgeInsets.all(8.0),
                                     decoration: BoxDecoration(
-                                      border:
-                                          Border.all(color: Colors.lightGreen),
+                                      border: Border.all(color: Colors.lightGreen),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: // Add some spacing between number and text
+                                    child:// Add some spacing between number and text
                                         Text(
-                                      '${index + 1}. ' + element,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.grey.shade500),
-                                    ),
+                                          '${index + 1}. '+element,
+                                          style: TextStyle(fontSize: 18, color: Colors.lightGreen),
+                                        ),
+
                                   );
                                 }).toList(),
                               ),
@@ -586,6 +553,7 @@ class _Classifier extends State<Classifier> {
                             //     fontSize: 16.0,
                             //   ),
                             // ),
+
                           ],
                         ),
                       )
