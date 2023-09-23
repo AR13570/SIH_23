@@ -33,44 +33,55 @@ ExpansionTileItem messageWidget({required Message message}) {
         color: Colors.white,
       ),
     ),
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                message.message,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "${message.name}",
-                style: TextStyle(color: Colors.grey, fontSize: 14),
-              )
-            ],
-          ),
-        ),
-        Row(
-          children: [
-            Chip(
-              label: Text("${message.likes.length}"),
-              deleteIcon: Icon(
-                !message.likes.contains(loggedInUser.value.phone)
-                    ? Icons.thumb_up_alt_outlined
-                    : Icons.thumb_up,
-                size: 17,
-              ),
-              onDeleted: () {
-                messageController.like(
-                  messageType: MessageType.post,
-                  messageId: message.messageId,
-                );
-              },
+    title: InkWell(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  message.message,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "${message.name}",
+                      style: TextStyle(color: Colors.grey, fontSize: 14),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    if (message.isExpert)
+                      Icon(
+                        Icons.check_circle,
+                        color: Colors.blue,
+                        size: 14,
+                      )
+                  ],
+                )
+              ],
             ),
-          ],
-        )
-      ],
+          ),
+          Chip(
+            label: Text("${message.likes.length}"),
+            deleteIcon: Icon(
+              !message.likes.contains(loggedInUser.value.phone)
+                  ? Icons.thumb_up_alt_outlined
+                  : Icons.thumb_up,
+              size: 17,
+            ),
+            onDeleted: () {
+              messageController.like(
+                messageType: MessageType.post,
+                messageId: message.messageId,
+              );
+            },
+          )
+        ],
+      ),
     ),
     subtitle: message.replies.isNotEmpty
         ? Align(

@@ -122,10 +122,19 @@ class MessageController extends GetxController {
           });
         }
       });
-      // messageDocument
-      //     .collection("replies")
-      //     .doc(postId!)
-      //     .update({"likes": FieldValue.increment(selected ? 1 : -1)});
+    }
+  }
+
+  deleteComment(
+      {required MessageType messageType,
+      required String messageId,
+      String? postId}) {
+    DocumentReference messageDocument =
+        FirebaseFirestore.instance.collection("message").doc(messageId);
+    if (messageType == MessageType.post) {
+      FirebaseFirestore.instance.collection("message").doc(messageId).delete();
+    } else {
+      messageDocument.collection("replies").doc(postId!).delete();
     }
   }
 }
